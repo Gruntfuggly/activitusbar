@@ -1,0 +1,28 @@
+{
+    "name": "activitusbar",
+    "displayName": "Activitus Bar",
+    "description": "Save some real estate by recreating the activity bar buttons on the status bar",
+    "version": "0.0.1",
+    "icon": "icon.png",
+    "publisher": "Gruntfuggly",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./extension",
+    "contributes": {},
+    "scripts": {},
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "eslint": "^3.6.0",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}
