@@ -1,3 +1,6 @@
+# v0.0.3 - 2017-10-23
+- Fixed stupid lowercase function
+
 # v0.0.2 - 2017-10-23
 - Added support for indicating active view
 - Added support for configuring visible views

@@ -4,7 +4,7 @@ var vscode = require( 'vscode' );
 var defaultViews = 'explorer,search,scm,debug,extensions';
 var views = vscode.workspace.getConfiguration( 'activitusbar' )
     .get( 'views', defaultViews )
-    .lowercase()
+    .toLowerCase()
     .replace( /\s/g, '' )
     .split( ',' );
 
