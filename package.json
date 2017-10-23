@@ -2,12 +2,13 @@
     "name": "activitusbar",
     "displayName": "Activitus Bar",
     "description": "Save some real estate by recreating the activity bar buttons on the status bar",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "icon": "icon.png",
     "publisher": "Gruntfuggly",
     "engines": {
         "vscode": "^1.5.0"
     },
+    "repository": "https://github.com/Gruntfuggly/activitusbar",
     "categories": [
         "Other"
     ],
@@ -15,7 +16,56 @@
         "*"
     ],
     "main": "./extension",
-    "contributes": {},
+    "contributes": {
+        "keybindings": [
+            {
+                "command": "activitusbar.selectExplorerView",
+                "key": "ctrl+shift+E",
+                "mac": "shift+cmd+E"
+            },
+            {
+                "command": "activitusbar.selectSearchView",
+                "key": "ctrl+shift+F",
+                "mac": "shift+cmd+F"
+            },
+            {
+                "command": "activitusbar.selectScmView",
+                "key": "ctrl+shift+G",
+                "mac": "ctrl+shift+G"
+            },
+            {
+                "command": "activitusbar.selectDebugView",
+                "key": "ctrl+shift+D",
+                "mac": "shift+cmd+D"
+            },
+            {
+                "command": "activitusbar.selectExtensionsView",
+                "key": "ctrl+shift+X",
+                "mac": "shift+cmd+X"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Activitus Bar configuration",
+            "properties": {
+                "activitusbar.views": {
+                    "type": "string",
+                    "description": "Views to include on the status bar (separated by commas, requires reload)",
+                    "default": "explorer,search,scm,debug,extensions"
+                },
+                "activitusbar.inactiveColour": {
+                    "type": "string",
+                    "description": "Colour of inactive icons",
+                    "default": "#bbb"
+                },
+                "activitusbar.activeColour": {
+                    "type": "string",
+                    "description": "Colour of the active icon",
+                    "default": "#fff"
+                }
+            }
+        }
+    },
     "scripts": {},
     "devDependencies": {
         "typescript": "^2.0.3",
