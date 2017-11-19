@@ -11,6 +11,7 @@ var views = vscode.workspace.getConfiguration( 'activitusbar' )
 var icons = { explorer: "file-text", search: "search", scm: "repo-forked", debug: "bug", extensions: "package" };
 var buttons = [];
 
+var open = 'hide';
 var startingPriority = 99999;
 
 String.prototype.capitalize = function()
@@ -39,8 +40,15 @@ function deselect()
 function selectView( view )
 {
     deselect();
+    if(open == view || view == 'hide')
+    {
+        vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility")
+    }
+    else{
     vscode.commands.executeCommand( 'workbench.view.' + view );
     buttons[ view ].color = activeColour();
+}
+        open = view;
 }
 
 function selectExplorerView() { selectView( 'explorer' ); }
