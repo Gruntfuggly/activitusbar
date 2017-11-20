@@ -52,7 +52,7 @@ function selectView( view )
 }
 
 function selectExplorerView() { selectView( 'explorer' ); }
-function selectSearchView() { selectView( 'search' ); }
+function selectSearchView() { selectView( 'search' ); vscode.commands.executeCommand("workbench.action.findInFilesWithSelectedText"); }
 function selectScmView() { selectView( 'scm' ); }
 function selectDebugView() { selectView( 'debug' ); }
 function selectExtensionsView() { selectView( 'extensions' ); }
