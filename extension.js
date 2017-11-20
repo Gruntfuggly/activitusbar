@@ -37,25 +37,44 @@ function deselect()
     } );
 }
 
+function showView( view )
+{
+    vscode.commands.executeCommand( 'workbench.view.' + view );
+    buttons[ view ].color = activeColour();
+    open = view;
+}
+
 function selectView( view )
 {
     deselect();
-    if(open == view || view == 'hide')
+    if( open === view || view === 'hide' )
     {
-        vscode.commands.executeCommand("workbench.action.toggleSidebarVisibility")
+        vscode.commands.executeCommand( "workbench.action.toggleSidebarVisibility" );
+        if( open === 'hide' )
+        {
+            buttons[ view ].color = activeColour();
+        }
+        else
+        {
+            open = 'hide';
+        }
     }
-    else{
-    vscode.commands.executeCommand( 'workbench.view.' + view );
-    buttons[ view ].color = activeColour();
-}
-        open = view;
+    else
+    {
+        showView( view );
+    }
 }
 
 function selectExplorerView() { selectView( 'explorer' ); }
-function selectSearchView() { selectView( 'search' ); vscode.commands.executeCommand("workbench.action.findInFilesWithSelectedText"); }
 function selectScmView() { selectView( 'scm' ); }
 function selectDebugView() { selectView( 'debug' ); }
 function selectExtensionsView() { selectView( 'extensions' ); }
+function selectSearchView() { selectView( 'search' ); }
+function selectSearchViewWithSelection()
+{
+    showView( 'search' );
+    vscode.commands.executeCommand( "workbench.action.findInFilesWithSelectedText" );
+}
 
 function activate( context )
 {
@@ -81,7 +100,8 @@ function activate( context )
         vscode.commands.registerCommand( 'activitusbar.selectSearchView', selectSearchView ),
         vscode.commands.registerCommand( 'activitusbar.selectScmView', selectScmView ),
         vscode.commands.registerCommand( 'activitusbar.selectDebugView', selectDebugView ),
-        vscode.commands.registerCommand( 'activitusbar.selectExtensionsView', selectExtensionsView ) );
+        vscode.commands.registerCommand( 'activitusbar.selectExtensionsView', selectExtensionsView ),
+        vscode.commands.registerCommand( 'activitusbar.selectSearchViewWithSelection', selectSearchViewWithSelection ) );
 }
 
 function deactivate()

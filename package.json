@@ -24,7 +24,7 @@
 				"mac": "shift+cmd+E"
 			},
 			{
-				"command": "activitusbar.selectSearchView",
+				"command": "activitusbar.selectSearchViewWithSelection",
 				"key": "ctrl+shift+F",
 				"mac": "shift+cmd+F"
 			},
