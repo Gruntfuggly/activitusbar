@@ -10,7 +10,13 @@ This extension also rebinds the view selection keys. If you have modified the de
 
 The colour of the active and inactive buttons can also be specified using `activitusbar.activeColour` and `activitusbar.inactiveColour`. By default these are white (`#fff`) and grey (`#bbb`).
 
-_Note: Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used._
+If required, the position of the icons can be adjusted by changing the value of `activitusbar.priority`. It defaults to 99999 which should place them at the far left. You may need to experiment to find a value which suits.
+
+## Known Issues
+
+Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used.
+
+If **Find in Files** is selected from the Edit Menu, again, the currently active view will become out of sync.
 
 ## Installing
 

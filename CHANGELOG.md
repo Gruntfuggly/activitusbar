@@ -1,3 +1,7 @@
+# v0.0.6 - 2017-11-21
+- Only toggle the views when clicking the buttons. Short cut keys always show the view.
+- Added priority setting to allow the icons to be placed differently in the status bar
+
 # v0.0.5 - 2017-11-20
 - Show currently selected view when making the sidebar visible again
 - Populate search box when opening find in files view
