@@ -12,7 +12,7 @@ var icons = { explorer: "file-text", search: "search", scm: "repo-forked", debug
 var buttons = [];
 
 var open = 'hide';
-var startingPriority = 99999;
+var startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );;
 
 String.prototype.capitalize = function()
 {

@@ -62,8 +62,13 @@
 					"type": "string",
 					"description": "Colour of the active icon",
 					"default": "#fff"
-				}
-			}
+				},
+                "activitusbar.priority": {
+                    "type": "integer",
+                    "description": "Controls the position within the status bar (higher values will move the icons further to the left",
+                    "default": 99999
+                }
+            }
 		}
 	},
 	"scripts": {},
