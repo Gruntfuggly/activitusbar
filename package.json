@@ -19,27 +19,27 @@
 	"contributes": {
 		"keybindings": [
 			{
-				"command": "activitusbar.selectExplorerView",
+				"command": "activitusbar.showExplorerView",
 				"key": "ctrl+shift+E",
 				"mac": "shift+cmd+E"
 			},
 			{
-				"command": "activitusbar.selectSearchViewWithSelection",
+				"command": "activitusbar.showSearchViewWithSelection",
 				"key": "ctrl+shift+F",
 				"mac": "shift+cmd+F"
 			},
 			{
-				"command": "activitusbar.selectScmView",
+				"command": "activitusbar.showScmView",
 				"key": "ctrl+shift+G",
 				"mac": "ctrl+shift+G"
 			},
 			{
-				"command": "activitusbar.selectDebugView",
+				"command": "activitusbar.showDebugView",
 				"key": "ctrl+shift+D",
 				"mac": "shift+cmd+D"
 			},
 			{
-				"command": "activitusbar.selectExtensionsView",
+				"command": "activitusbar.showExtensionsView",
 				"key": "ctrl+shift+X",
 				"mac": "shift+cmd+X"
 			}
@@ -77,7 +77,7 @@
 	},
 	"__metadata": {
 		"id": "47137038-6832-49c2-a31c-9ad3d95187fc",
-		"publisherDisplayName": "Gruntfuggly",
-		"publisherId": "d4906d2e-f2ee-492d-9c7c-02b6160599ec"
+		"publisherId": "d4906d2e-f2ee-492d-9c7c-02b6160599ec",
+		"publisherDisplayName": "Gruntfuggly"
 	}
 }
