@@ -2,7 +2,7 @@
 	"name": "activitusbar",
 	"displayName": "Activitus Bar",
 	"description": "Save some real estate by recreating the activity bar buttons on the status bar",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"icon": "icon.png",
 	"publisher": "Gruntfuggly",
 	"engines": {
@@ -27,6 +27,11 @@
 				"command": "activitusbar.showSearchViewWithSelection",
 				"key": "ctrl+shift+F",
 				"mac": "shift+cmd+F"
+			},
+			{
+				"command": "activitusbar.showReplaceViewWithSelection",
+				"key": "ctrl+shift+H",
+				"mac": "shift+cmd+H"
 			},
 			{
 				"command": "activitusbar.showScmView",

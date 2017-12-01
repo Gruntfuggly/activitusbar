@@ -80,6 +80,11 @@ function showSearchViewWithSelection()
     showView( 'search' );
     vscode.commands.executeCommand( "workbench.action.findInFilesWithSelectedText" );
 }
+function showReplaceViewWithSelection()
+{
+    showView( 'search' );
+    vscode.commands.executeCommand( "workbench.action.replaceInFilesWithSelectedText" );
+}
 
 function activate( context )
 {
@@ -110,7 +115,8 @@ function activate( context )
         vscode.commands.registerCommand( 'activitusbar.showScmView', showScmView ),
         vscode.commands.registerCommand( 'activitusbar.showDebugView', showDebugView ),
         vscode.commands.registerCommand( 'activitusbar.showExtensionsView', showExtensionsView ),
-        vscode.commands.registerCommand( 'activitusbar.showSearchViewWithSelection', showSearchViewWithSelection ) );
+        vscode.commands.registerCommand( 'activitusbar.showSearchViewWithSelection', showSearchViewWithSelection ),
+        vscode.commands.registerCommand( 'activitusbar.showReplaceViewWithSelection', showReplaceViewWithSelection ) );
 }
 
 function deactivate()

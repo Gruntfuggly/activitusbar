@@ -1,3 +1,6 @@
+# v0.0.7 - 2017-12-01
+- Update on 'replace in files' keyboard shortcut
+
 # v0.0.6 - 2017-11-21
 - Only toggle the views when clicking the buttons. Short cut keys always show the view.
 - Added priority setting to allow the icons to be placed differently in the status bar
