@@ -14,6 +14,8 @@ If required, the position of the icons can be adjusted by changing the value of 
 
 By default, clicking a button again will toggle the sidebar so that it is not visible. If you want to disable this behaviour, set 'activitusbar.toggleSidebar' to false.
 
+One last option is 'activitusbar.searchViewInPanel'. If you move the search view to the panel (using the context menu) then set this to true to allow the panel to be toggled instead of the sidebar. *Note: Don't set this to true with the search view in the normal position!*
+
 ## Known Issues
 
 Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used.

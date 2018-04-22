@@ -1,3 +1,6 @@
+# v0.0.9 - 2018-04-22
+- Add option to toggle panel instead of sidebar when the search view is moved to the bottom panel.
+
 # v0.0.8 - 2018-04-22
 - Add option to disable toggling of the sidebar
 
