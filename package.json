@@ -2,7 +2,7 @@
 	"name": "activitusbar",
 	"displayName": "Activitus Bar",
 	"description": "Save some real estate by recreating the activity bar buttons on the status bar",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"icon": "icon.png",
 	"publisher": "Gruntfuggly",
 	"engines": {
@@ -68,12 +68,17 @@
 					"description": "Colour of the active icon",
 					"default": "#fff"
 				},
-                "activitusbar.priority": {
-                    "type": "integer",
-                    "description": "Controls the position within the status bar (higher values will move the icons further to the left",
-                    "default": 99999
-                }
-            }
+				"activitusbar.priority": {
+					"type": "integer",
+					"description": "Controls the position within the status bar (higher values will move the icons further to the left",
+					"default": 99999
+				},
+				"activitusbar.toggleSidebar": {
+					"type":"boolean",
+					"description": "Set this to false if you don't want to toggle the side bar if the same view is selected again",
+					"default": true
+				}
+			}
 		}
 	},
 	"scripts": {},

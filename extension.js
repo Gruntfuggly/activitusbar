@@ -50,7 +50,14 @@ function toggleView( view )
     deselect();
     if( open === view || view === 'hide' )
     {
-        vscode.commands.executeCommand( "workbench.action.toggleSidebarVisibility" );
+        if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'toggleSidebar' ) )
+        {
+            vscode.commands.executeCommand( "workbench.action.toggleSidebarVisibility" );
+        }
+        else
+        {
+            buttons[ view ].color = activeColour();
+        }
         if( open === 'hide' )
         {
             buttons[ view ].color = activeColour();

@@ -12,6 +12,8 @@ The colour of the active and inactive buttons can also be specified using `activ
 
 If required, the position of the icons can be adjusted by changing the value of `activitusbar.priority`. It defaults to 99999 which should place them at the far left. You may need to experiment to find a value which suits.
 
+By default, clicking a button again will toggle the sidebar so that it is not visible. If you want to disable this behaviour, set 'activitusbar.toggleSidebar' to false.
+
 ## Known Issues
 
 Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used.

@@ -1,3 +1,6 @@
+# v0.0.8 - 2018-04-22
+- Add option to disable toggling of the sidebar
+
 # v0.0.7 - 2017-12-01
 - Update on 'replace in files' keyboard shortcut
 
