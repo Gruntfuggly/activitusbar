@@ -1,3 +1,6 @@
+# v0.0.10 - 2018-04-22
+- Fix checking of searchViewInPanel setting
+
 # v0.0.9 - 2018-04-22
 - Add option to toggle panel instead of sidebar when the search view is moved to the bottom panel.
 

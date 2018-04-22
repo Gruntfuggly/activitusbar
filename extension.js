@@ -52,7 +52,7 @@ function toggleView( view )
     {
         if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'toggleSidebar' ) )
         {
-            if( view === 'search' && vscode.workspace.getConfiguration( 'activitusbar' ).get( 'searchViewInPanel' ) )
+            if( view === 'search' && vscode.workspace.getConfiguration( 'activitusbar' ).get( 'searchViewInPanel' ) === true )
             {
                 vscode.commands.executeCommand( "workbench.action.togglePanel" );
             }
