@@ -2,13 +2,19 @@
 var vscode = require( 'vscode' );
 
 var defaultViews = 'explorer,search,scm,debug,extensions';
-var views = vscode.workspace.getConfiguration( 'activitusbar' )
+var viewsItems = vscode.workspace.getConfiguration( 'activitusbar' )
     .get( 'views', defaultViews )
-    .toLowerCase()
     .replace( /\s/g, '' )
     .split( ',' );
+var viewsIcons = vscode.workspace.getConfiguration('activitusbar').get('viewsIcons');
 
-var icons = { explorer: "file-text", search: "search", scm: "repo-forked", debug: "bug", extensions: "package" };
+var views = [];
+
+viewsItems.forEach(function (view)
+{
+    views.push({ "command": view, "icon": viewsIcons[view] });
+});
+
 var buttons = [];
 
 var open = 'hide';
@@ -33,7 +39,7 @@ function deselect()
 {
     views.forEach( function( view )
     {
-        buttons[ view ].color = inactiveColour();
+        buttons[ view.command ].color = inactiveColour();
     } );
 }
 
@@ -50,10 +56,9 @@ function toggleView( view )
     deselect();
     if( open === view || view === 'hide' )
     {
-        if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'toggleSidebar' ) )
+        if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'toggleSidebar' ))
         {
-            if( view === 'search' && vscode.workspace.getConfiguration( 'activitusbar' ).get( 'searchViewInPanel' ) === true )
-            {
+            if( view === 'search' && vscode.workspace.getConfiguration( 'activitusbar' ).get( 'searchViewInPanel' ) === true) {
                 vscode.commands.executeCommand( "workbench.action.togglePanel" );
             }
             else
@@ -80,15 +85,6 @@ function toggleView( view )
     }
 }
 
-function toggleExplorerView() { toggleView( 'explorer' ); }
-function toggleScmView() { toggleView( 'scm' ); }
-function toggleDebugView() { toggleView( 'debug' ); }
-function toggleExtensionsView() { toggleView( 'extensions' ); }
-function toggleSearchView() { toggleView( 'search' ); }
-function showExplorerView() { showView( 'explorer' ); }
-function showScmView() { showView( 'scm' ); }
-function showDebugView() { showView( 'debug' ); }
-function showExtensionsView() { showView( 'extensions' ); }
 function showSearchViewWithSelection()
 {
     showView( 'search' );
@@ -99,6 +95,24 @@ function showReplaceViewWithSelection()
     showView( 'search' );
     vscode.commands.executeCommand( "workbench.action.replaceInFilesWithSelectedText" );
 }
+
+
+function makeShowView( view )
+{
+    return function()
+    {
+        showView( view );
+    };
+}
+
+function makeToggleView( view )
+{
+    return function()
+    {
+        toggleView( view );
+    };
+}
+
 
 function activate( context )
 {
@@ -116,19 +130,20 @@ function activate( context )
 
     views.forEach( function( view )
     {
-        buttons[ view ] = addButton( icons[ view ], 'activitusbar.toggle' + view.capitalize() + 'View' );
-    } );
+        var commandKey = view.command.capitalize() + 'View'
+        var command = 'activitusbar.toggle' + commandKey;
+        buttons[view.command] = addButton( view.icon, command );
+        vscode.commands.registerCommand( command, makeToggleView( view.command ) );
+
+        if (view.command !== 'search')
+        {
+            vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view.command ) );
+        }
+    });
+
+
 
     context.subscriptions.push(
-        vscode.commands.registerCommand( 'activitusbar.toggleExplorerView', toggleExplorerView ),
-        vscode.commands.registerCommand( 'activitusbar.toggleSearchView', toggleSearchView ),
-        vscode.commands.registerCommand( 'activitusbar.toggleScmView', toggleScmView ),
-        vscode.commands.registerCommand( 'activitusbar.toggleDebugView', toggleDebugView ),
-        vscode.commands.registerCommand( 'activitusbar.toggleExtensionsView', toggleExtensionsView ),
-        vscode.commands.registerCommand( 'activitusbar.showExplorerView', showExplorerView ),
-        vscode.commands.registerCommand( 'activitusbar.showScmView', showScmView ),
-        vscode.commands.registerCommand( 'activitusbar.showDebugView', showDebugView ),
-        vscode.commands.registerCommand( 'activitusbar.showExtensionsView', showExtensionsView ),
         vscode.commands.registerCommand( 'activitusbar.showSearchViewWithSelection', showSearchViewWithSelection ),
         vscode.commands.registerCommand( 'activitusbar.showReplaceViewWithSelection', showReplaceViewWithSelection ) );
 }

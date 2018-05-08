@@ -58,6 +58,17 @@
 					"description": "Views to include on the status bar (separated by commas, requires reload)",
 					"default": "explorer,search,scm,debug,extensions"
 				},
+				"activitusbar.viewsIcons": {
+					"type": "object",
+					"description": "Icons for views on the status bar",
+					"default": {
+						"explorer": "file-text",
+						"search": "search",
+						"scm": "repo-forked",
+						"debug": "bug",
+						"extensions": "package"
+					}
+				},
 				"activitusbar.inactiveColour": {
 					"type": "string",
 					"description": "Colour of inactive icons",
