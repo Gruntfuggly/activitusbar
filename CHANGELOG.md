@@ -1,3 +1,6 @@
+# v0.0.11 - 2018-05-15
+- Add support for custom view, thanks to [rosinality](https://github.com/rosinality)
+
 # v0.0.10 - 2018-04-22
 - Fix checking of searchViewInPanel setting
 
