@@ -1,3 +1,6 @@
+# v0.0.12 - 2018-05-16
+- Add warning to README.md about missing octicons
+
 # v0.0.11 - 2018-05-15
 - Add support for custom view, thanks to [rosinality](https://github.com/rosinality)
 
