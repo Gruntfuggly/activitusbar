@@ -1,3 +1,6 @@
+# v0.0.13 - 2018-06-07
+- Fix opening of search view for replace
+
 # v0.0.12 - 2018-05-16
 - Add warning to README.md about missing octicons
 

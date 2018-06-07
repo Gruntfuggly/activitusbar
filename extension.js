@@ -111,7 +111,7 @@ function activate( context )
         function showReplaceViewWithSelection()
         {
             showView( 'search' );
-            vscode.commands.executeCommand( "workbench.action.replaceInFilesWithSelectedText" );
+            vscode.commands.executeCommand( "workbench.action.replaceInFiles" );
         }
 
         function makeShowView( view )
