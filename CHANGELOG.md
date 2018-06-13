@@ -1,3 +1,7 @@
+# v0.0.14 - 2018-06-13
+- Add alignment option
+- Make configuration changes immediately rebuild the activitus bar without needing a reload
+
 # v0.0.13 - 2018-06-07
 - Fix opening of search view for replace
 

@@ -2,7 +2,7 @@
     "name": "activitusbar",
     "displayName": "Activitus Bar",
     "description": "Save some real estate by recreating the activity bar buttons on the status bar",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "icon": "icon.png",
     "publisher": "Gruntfuggly",
     "engines": {
@@ -78,6 +78,15 @@
                     "type": "integer",
                     "description": "Controls the position within the status bar (higher values will move the icons further to the left",
                     "default": 99999
+                },
+                "activitusbar.alignment": {
+                    "type": "string",
+                    "enum": [
+                        "Left",
+                        "Right"
+                    ],
+                    "default": "Left",
+                    "description": "Position of the activitus bar section within the status bar"
                 },
                 "activitusbar.toggleSidebar": {
                     "type": "boolean",
