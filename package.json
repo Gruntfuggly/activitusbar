@@ -2,9 +2,16 @@
     "name": "activitusbar",
     "displayName": "Activitus Bar",
     "description": "Save some real estate by recreating the activity bar buttons on the status bar",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "icon": "icon.png",
     "publisher": "Gruntfuggly",
+    "keywords": [
+        "activity bar",
+        "status bar",
+        "task",
+        "tasks",
+        "task buttons"
+    ],
     "engines": {
         "vscode": "^1.5.0"
     },

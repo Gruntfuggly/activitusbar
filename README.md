@@ -22,6 +22,10 @@ By default, clicking a button again will toggle the sidebar so that it is not vi
 
 One last option is `activitusbar.searchViewInPanel`. If you move the search view to the panel (using the context menu) then set this to true to allow the panel to be toggled instead of the sidebar. *Note: Don't set this to true with the search view in the normal position!*
 
+### Task Buttons
+
+Buttons can also be configured to start tasks. Just use "task.*task-label*". E.g., `"task.build":"tools"` will create a button with the tools icons which starts the "build" task when the button is clicked.
+
 ## Known Issues
 
 Unfortunately, the octicons set currently supported by vscode is now slightly out of date, so some may not appear.

@@ -122,6 +122,17 @@ function activate( context )
             return button;
         }
 
+        function addTaskButton( label, command )
+        {
+            var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
+            var button = vscode.window.createStatusBarItem( alignment, priority-- );
+            button.text = '$(' + label + ')';
+            button.command = command;
+            button.color = inactiveColour();
+            button.show();
+            return button;
+        }
+
         function createButtons()
         {
             Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
@@ -137,14 +148,37 @@ function activate( context )
 
             views.forEach( function( view )
             {
-                var commandKey = view.capitalize() + 'View'
-                var command = 'activitusbar.toggle' + commandKey;
-                buttons[ view ] = addButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ view ], command, view );
-                commands.push( vscode.commands.registerCommand( command, makeToggleView( view ) ) );
-
-                if( view !== 'search' )
+                var command;
+                if( view.indexOf( "task." ) === 0 )
                 {
-                    commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view ) ) );
+                    var taskName = view.substr( 5 );
+                    vscode.tasks.fetchTasks().then( function( availableTasks )
+                    {
+                        availableTasks.map( function( task )
+                        {
+                            if( task.name === taskName )
+                            {
+                                command = 'activitusbar.startTask' + taskName;
+                                buttons[ view ] = addTaskButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ view ], command );
+                                commands.push( vscode.commands.registerCommand( command, function()
+                                {
+                                    vscode.tasks.executeTask( task );
+                                } ) );
+                            }
+                        } );
+                    } );
+                }
+                else
+                {
+                    var commandKey = view.capitalize() + 'View'
+                    command = 'activitusbar.toggle' + commandKey;
+                    buttons[ view ] = addButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ view ], command, view );
+                    commands.push( vscode.commands.registerCommand( command, makeToggleView( view ) ) );
+
+                    if( view !== 'search' )
+                    {
+                        commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view ) ) );
+                    }
                 }
             } );
         }

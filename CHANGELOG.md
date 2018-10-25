@@ -1,3 +1,6 @@
+# v0.0.15 - 2018-10-25
+- Add support for task buttons
+
 # v0.0.14 - 2018-06-13
 - Add alignment option
 - Make configuration changes immediately rebuild the activitus bar without needing a reload
