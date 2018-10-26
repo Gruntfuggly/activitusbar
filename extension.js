@@ -31,7 +31,10 @@ function activate( context )
         {
             views.forEach( function( view )
             {
-                buttons[ view ].color = inactiveColour();
+                if( buttons[ view ] )
+                {
+                    buttons[ view ].color = inactiveColour();
+                }
             } );
         }
 
@@ -39,7 +42,10 @@ function activate( context )
         {
             deselect();
             vscode.commands.executeCommand( 'workbench.view.' + view );
-            buttons[ view ].color = activeColour();
+            if( buttons[ view ] )
+            {
+                buttons[ view ].color = activeColour();
+            }
             open = view;
         }
 
@@ -61,11 +67,17 @@ function activate( context )
                 }
                 else
                 {
-                    buttons[ view ].color = activeColour();
+                    if( buttons[ view ] )
+                    {
+                        buttons[ view ].color = activeColour();
+                    }
                 }
                 if( open === 'hide' )
                 {
-                    buttons[ view ].color = activeColour();
+                    if( buttons[ view ] )
+                    {
+                        buttons[ view ].color = activeColour();
+                    }
                 }
                 else
                 {

@@ -1,3 +1,6 @@
+# v0.0.16 - 2018-10-26
+- Fix error when task buttons are defined
+
 # v0.0.15 - 2018-10-25
 - Add support for task buttons
 
