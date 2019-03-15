@@ -24,8 +24,7 @@
     ],
     "main": "./extension",
     "contributes": {
-        "keybindings": [
-            {
+        "keybindings": [{
                 "command": "activitusbar.showExplorerView",
                 "key": "ctrl+shift+E",
                 "mac": "shift+cmd+E"
@@ -73,13 +72,11 @@
                 },
                 "activitusbar.inactiveColour": {
                     "type": "string",
-                    "description": "Colour of inactive icons",
-                    "default": "#bbb"
+                    "description": "Colour of inactive icons"
                 },
                 "activitusbar.activeColour": {
                     "type": "string",
-                    "description": "Colour of the active icon",
-                    "default": "#fff"
+                    "description": "Colour of the active icon"
                 },
                 "activitusbar.priority": {
                     "type": "integer",
