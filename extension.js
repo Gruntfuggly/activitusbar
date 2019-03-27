@@ -17,12 +17,12 @@ function activate( context )
 
     function inactiveColour()
     {
-        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour', '#bbb' );
+        return vscode.workspace.getConfiguration('activitusbar').get('inactiveColour') || new vscode.ThemeColor('statusBar.foreground');
     }
 
     function activeColour()
     {
-        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour', '#fff' );
+        return vscode.workspace.getConfiguration('activitusbar').get('activeColour');
     }
 
     function build()
