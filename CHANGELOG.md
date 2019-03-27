@@ -1,3 +1,6 @@
+# v0.0.17 - 2019-03-27
+- Remove default colours so that the extension plays nicely with extesions which change the status bar colour, thanks to [lochstar](https://github.com/lochstar)
+
 # v0.0.16 - 2018-10-26
 - Fix error when task buttons are defined
 
