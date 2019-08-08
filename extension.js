@@ -17,12 +17,12 @@ function activate( context )
 
     function inactiveColour()
     {
-        return vscode.workspace.getConfiguration('activitusbar').get('inactiveColour') || new vscode.ThemeColor('statusBar.foreground');
+        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' ) || new vscode.ThemeColor( 'statusBar.foreground' );
     }
 
     function activeColour()
     {
-        return vscode.workspace.getConfiguration('activitusbar').get('activeColour');
+        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
     }
 
     function build()
@@ -223,7 +223,7 @@ function activate( context )
                 "search": "search",
                 "scm": "repo-forked",
                 "debug": "bug",
-                "extensions": "package",
+                "extensions": "package"
             };
 
             Object.keys( viewConfig ).map( v =>
