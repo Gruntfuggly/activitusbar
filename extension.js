@@ -197,10 +197,12 @@ function activate( context )
 
                     vscode.tasks.fetchTasks().then( function( availableTasks )
                     {
+                        var found = false;
                         availableTasks.map( function( task )
                         {
                             if( task.name === taskName && ( workspace === undefined || task.scope.name === workspace ) )
                             {
+                                found = true;
                                 command = 'activitusbar.startTask' + taskName;
                                 buttons[ view.name ] = addTaskButton( view.octicon, command, taskName, view.tooltip );
                                 commands.push( vscode.commands.registerCommand( command, function()
@@ -209,6 +211,10 @@ function activate( context )
                                 } ) );
                             }
                         } );
+                        if( found === false )
+                        {
+                            vscode.window.showErrorMessage( "Failed to create button for task '" + taskName + "'" );
+                        }
                     } );
                 }
                 else if( view.name.toLowerCase() === "settings" )
