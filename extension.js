@@ -3,7 +3,7 @@ var vscode = require( 'vscode' );
 
 function activate( context )
 {
-    var views = [];
+    var viewNames = [];
     var commands = [];
     var buttons = [];
     var open = 'hide';
@@ -36,7 +36,7 @@ function activate( context )
     {
         function deselect()
         {
-            views.forEach( function( view )
+            viewNames.forEach( function( view )
             {
                 if( buttons[ view ] )
                 {
@@ -132,7 +132,7 @@ function activate( context )
             button.text = '$(' + label + ')';
             button.command = command;
             button.tooltip = tooltip ? tooltip : tooltips[ viewName ];
-            button.color = priority === startingPriority ? activeColour() : inactiveColour();
+            button.color = inactiveColour();
             if( open === viewName )
             {
                 button.color = activeColour();
@@ -177,25 +177,32 @@ function activate( context )
             commands = [];
 
             var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).views;
-            views = Object.keys( definedViews ).filter( v => definedViews[ v ].length > 0 );
             startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );;
 
             priority = startingPriority;
 
-            views.forEach( function( view )
+            definedViews.forEach( function( view )
             {
                 var command;
-                if( view.indexOf( "task." ) === 0 )
+                if( view.name.indexOf( "task." ) === 0 )
                 {
-                    var taskName = view.substr( 5 );
+                    var taskName = view.name.substr( 5 );
+                    var dotPosition = taskName.indexOf( '.' );
+                    var workspace;
+                    if( dotPosition > -1 )
+                    {
+                        workspace = taskName.substr( 0, dotPosition );
+                        taskName = taskName.substr( dotPosition + 1 );
+                    }
+
                     vscode.tasks.fetchTasks().then( function( availableTasks )
                     {
                         availableTasks.map( function( task )
                         {
-                            if( task.name === taskName )
+                            if( task.name === taskName && ( workspace === undefined || task.scope.name === workspace ) )
                             {
                                 command = 'activitusbar.startTask' + taskName;
-                                buttons[ view ] = addTaskButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ view ], command );
+                                buttons[ view.name ] = addTaskButton( view.octicon, command, taskName, view.tooltip );
                                 commands.push( vscode.commands.registerCommand( command, function()
                                 {
                                     vscode.tasks.executeTask( task );
@@ -204,20 +211,21 @@ function activate( context )
                         } );
                     } );
                 }
-                else if( view.toLowerCase() === 'settings' )
+                else if( view.name.toLowerCase() === "settings" )
                 {
-                    buttons[ 'settings' ] = addSettingsButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ 'settings' ] );
+                    buttons[ view.name ] = addSettingsButton( view.octicon );
                 }
                 else
                 {
-                    var commandKey = view.capitalize() + 'View'
+                    var commandKey = view.name.capitalize() + 'View'
                     command = 'activitusbar.toggle' + commandKey;
-                    buttons[ view ] = addButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ view ], command, view );
-                    commands.push( vscode.commands.registerCommand( command, makeToggleView( view ) ) );
+                    viewNames.push( view.name );
+                    buttons[ view.name ] = addButton( view.octicon, command, view.name, view.tooltip );
+                    commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
 
-                    if( view !== 'search' )
+                    if( view.name !== 'search' )
                     {
-                        commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view ) ) );
+                        commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view.name ) ) );
                     }
                 }
             } );
@@ -240,7 +248,22 @@ function activate( context )
 
     function updateDeprecatedConfiguration()
     {
-        var viewConfig = vscode.workspace.getConfiguration( 'activitusbar' ).views;
+        function migrate( oldConfig )
+        {
+            var newConfig = [];
+
+            Object.keys( oldConfig ).map( v =>
+            {
+                newConfig.push( { name: v, octicon: oldConfig[ v ] } );
+            } );
+
+            return newConfig;
+        }
+
+        var config = vscode.workspace.getConfiguration( 'activitusbar' );
+        var viewConfig = config.views;
+
+        var details = config.inspect( 'views' );
 
         if( typeof ( viewConfig ) === "string" )
         {
@@ -262,7 +285,19 @@ function activate( context )
                 }
             } );
 
-            vscode.workspace.getConfiguration( 'activitusbar' ).update( 'views', viewConfig, true ).then( build );
+            config.update( 'views', viewConfig, true ).then( build );
+        }
+        else if( details.globalValue && details.globalValue.constructor !== Array )
+        {
+            config.update( 'views', migrate( details.globalValue ), vscode.ConfigurationTarget.Global ).then( build );
+        }
+        else if( details.workspaceValue && details.workspaceValue.constructor !== Array )
+        {
+            config.update( 'views', migrate( details.workspaceValue ), vscode.ConfigurationTarget.Workspace ).then( build );
+        }
+        else if( details.workspaceFolderValue && details.workspaceFolderValue.constructor !== Array )
+        {
+            config.update( 'views', migrate( details.workspaceFolderValue ), vscode.ConfigurationTarget.WorkspaceFolder ).then( build );
         }
         else
         {

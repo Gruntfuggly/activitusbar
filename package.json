@@ -61,15 +61,30 @@
             "title": "Activitus Bar",
             "properties": {
                 "activitusbar.views": {
-                    "type": "object",
+                    "type": "array",
                     "description": "Views to include on the status bar with associated icons",
-                    "default": {
-                        "explorer": "file-text",
-                        "search": "search",
-                        "scm": "repo-forked",
-                        "debug": "bug",
-                        "extensions": "package"
-                    }
+                    "default": [
+                        {
+                            "name": "explorer",
+                            "octicon": "file-text"
+                        },
+                        {
+                            "name": "search",
+                            "octicon": "search"
+                        },
+                        {
+                            "name": "scm",
+                            "octicon": "repo-forked"
+                        },
+                        {
+                            "name": "debug",
+                            "octicon": "bug"
+                        },
+                        {
+                            "name": "extensions",
+                            "octicon": "package"
+                        }
+                    ]
                 },
                 "activitusbar.inactiveColour": {
                     "type": "string",
