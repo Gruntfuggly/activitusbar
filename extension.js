@@ -7,6 +7,13 @@ function activate( context )
     var commands = [];
     var buttons = [];
     var open = 'hide';
+    var tooltips = {
+        "explorer": "Explorer",
+        "search": "Search",
+        "scm": "Source Control",
+        "debug": "Debug",
+        "extensions": "Extensions"
+    };
     var priority;
     var startingPriority;
 
@@ -118,14 +125,15 @@ function activate( context )
             };
         }
 
-        function addButton( label, command, view )
+        function addButton( label, command, viewName, tooltip )
         {
             var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
             var button = vscode.window.createStatusBarItem( alignment, priority-- );
             button.text = '$(' + label + ')';
             button.command = command;
+            button.tooltip = tooltip ? tooltip : tooltips[ viewName ];
             button.color = priority === startingPriority ? activeColour() : inactiveColour();
-            if( open === view )
+            if( open === viewName )
             {
                 button.color = activeColour();
             }
@@ -134,13 +142,17 @@ function activate( context )
             return button;
         }
 
-        function addTaskButton( label, command )
+        function addTaskButton( label, command, taskName, tooltip )
         {
             var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
             var button = vscode.window.createStatusBarItem( alignment, priority-- );
             button.text = '$(' + label + ')';
             button.command = command;
             button.color = inactiveColour();
+            if( tooltip )
+            {
+                button.tooltip = taskName ? "Run task " + taskName : tooltip
+            }
             button.show();
             return button;
         }
