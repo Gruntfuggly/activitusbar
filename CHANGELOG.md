@@ -1,3 +1,6 @@
+# v0.0.19 - 2019-08-08
+- Add example (default) configuration to README.md
+
 # v0.0.18 - 2019-08-08
 - Add button tooltips
 - Add support for settings button

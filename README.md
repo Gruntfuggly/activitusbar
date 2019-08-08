@@ -4,7 +4,7 @@ One of my work colleagues was complaining about the activity bar wasting too muc
 
 ## Configuration
 
-The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, with their associated icons. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions.
+The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, their associated icons and an optional tooltip. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions. (*See Default Configuration below*).
 
 This extension also rebinds the view selection keys. If you have modified the default key bindings, this may be an issue.
 
@@ -18,8 +18,8 @@ Once you have the name of the view, choose an icon (see known issues below) from
 
 ```
 {
-    "name": "extension.test", 
-    "octicon": "beaker" 
+    "name": "extension.test",
+    "octicon": "beaker",
 }
 ```
 
@@ -29,11 +29,52 @@ One last option is `activitusbar.searchViewInPanel`. If you move the search view
 
 ### Task Buttons
 
-Buttons can also be configured to start tasks. Just use "task.*task-label*". E.g., `{ "name": "task.build", "octicon": "tools" }` will create a button with the tools icons which starts the "build" task when the button is clicked.
+Buttons can also be configured to start tasks. Just use "task.*task-label*". For example, this:
+```
+{
+    "name": "task.build",
+    "octicon": "tools",
+    "tooltip": "Build project"
+}
+```
+will create a button with the tools icons which starts the "build" task when the button is clicked.
 
 ### Settings Button
 
-You can also add a button which opens the settings GUI using `{ "name": "settings", "icon": "gear" }`, for example.
+You can also add a button which opens the settings GUI using
+```
+{
+    "name": "settings",
+    "icon": "gear"
+}
+```
+
+### Default Configuration
+
+```
+"activitusbar.views": [
+    {
+      "name": "explorer",
+      "octicon": "file-text"
+    },
+    {
+      "name": "search",
+      "octicon": "search"
+    },
+    {
+      "name": "scm",
+      "octicon": "repo-forked"
+    },
+    {
+      "name": "debug",
+      "octicon": "bug"
+    },
+    {
+      "name": "extensions",
+      "octicon": "package"
+    }
+  ]
+```
 
 ## Known Issues
 
