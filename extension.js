@@ -157,6 +157,18 @@ function activate( context )
             return button;
         }
 
+        function addSettingsButton( label )
+        {
+            var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
+            var button = vscode.window.createStatusBarItem( alignment, priority-- );
+            button.text = '$(' + label + ')';
+            button.command = "workbench.action.openSettings";
+            button.color = inactiveColour();
+            button.tooltip = "Open settings";
+            button.show();
+            return button;
+        }
+
         function createButtons()
         {
             Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
@@ -191,6 +203,10 @@ function activate( context )
                             }
                         } );
                     } );
+                }
+                else if( view.toLowerCase() === 'settings' )
+                {
+                    buttons[ 'settings' ] = addSettingsButton( vscode.workspace.getConfiguration( 'activitusbar' ).views[ 'settings' ] );
                 }
                 else
                 {
