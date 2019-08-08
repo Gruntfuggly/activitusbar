@@ -58,7 +58,7 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "Activitus Bar configuration",
+            "title": "Activitus Bar",
             "properties": {
                 "activitusbar.views": {
                     "type": "object",
