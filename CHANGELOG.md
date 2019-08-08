@@ -1,5 +1,11 @@
+# v0.0.18 - 2019-08-08
+- Add button tooltips
+- Add support for settings button
+- Migrate settings to an array to make it easier to remove unwanted buttons
+- Add error for failed task buttons
+
 # v0.0.17 - 2019-03-27
-- Remove default colours so that the extension plays nicely with extesions which change the status bar colour, thanks to [lochstar](https://github.com/lochstar)
+- Remove default colours so that the extension plays nicely with extensions which change the status bar colour, thanks to [lochstar](https://github.com/lochstar)
 
 # v0.0.16 - 2018-10-26
 - Fix error when task buttons are defined
