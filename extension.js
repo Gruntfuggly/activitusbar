@@ -149,10 +149,7 @@ function activate( context )
             button.text = '$(' + label + ')';
             button.command = command;
             button.color = inactiveColour();
-            if( tooltip )
-            {
-                button.tooltip = taskName ? "Run task " + taskName : tooltip
-            }
+            button.tooltip = tooltip ? tooltip : "Run task " + taskName;
             button.show();
             return button;
         }

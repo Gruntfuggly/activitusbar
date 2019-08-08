@@ -1,3 +1,6 @@
+# v0.0.20 - 2019-08-08
+- Fix task button tooltips
+
 # v0.0.19 - 2019-08-08
 - Add example (default) configuration to README.md
 
