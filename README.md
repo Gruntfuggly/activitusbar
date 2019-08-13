@@ -45,7 +45,7 @@ You can also add a button which opens the settings GUI using
 ```
 {
     "name": "settings",
-    "icon": "gear"
+    "octicon": "gear"
 }
 ```
 

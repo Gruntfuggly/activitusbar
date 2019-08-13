@@ -1,3 +1,6 @@
+# v0.0.21 - 2019-08-13
+- Fix incorrect settings icon in README.md
+
 # v0.0.20 - 2019-08-08
 - Fix task button tooltips
 
