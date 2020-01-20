@@ -23,7 +23,7 @@
         "*"
     ],
     "main": "./extension",
-    "extensionKind" ["ui", "workspace"],
+    "extensionKind": ["ui", "workspace"],
     "contributes": {
         "keybindings": [
             {
