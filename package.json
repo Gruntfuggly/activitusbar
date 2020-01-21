@@ -70,23 +70,23 @@
                     "default": [
                         {
                             "name": "explorer",
-                            "octicon": "file-text"
+                            "codicon": "files"
                         },
                         {
                             "name": "search",
-                            "octicon": "search"
+                            "codicon": "search"
                         },
                         {
                             "name": "scm",
-                            "octicon": "repo-forked"
+                            "codicon": "source-control"
                         },
                         {
                             "name": "debug",
-                            "octicon": "bug"
+                            "codicon": "debug"
                         },
                         {
                             "name": "extensions",
-                            "octicon": "package"
+                            "codicon": "extensions"
                         }
                     ]
                 },

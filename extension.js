@@ -201,7 +201,7 @@ function activate( context )
                             {
                                 found = true;
                                 command = 'activitusbar.startTask' + taskName;
-                                buttons[ view.name ] = addTaskButton( view.octicon, command, taskName, view.tooltip );
+                                buttons[ view.name ] = addTaskButton( view.codicon ? view.codicon : view.octicon, command, taskName, view.tooltip );
                                 commands.push( vscode.commands.registerCommand( command, function()
                                 {
                                     vscode.tasks.executeTask( task );
@@ -216,14 +216,14 @@ function activate( context )
                 }
                 else if( view.name.toLowerCase() === "settings" )
                 {
-                    buttons[ view.name ] = addSettingsButton( view.octicon );
+                    buttons[ view.name ] = addSettingsButton( view.codicon ? view.codicon : view.octicon );
                 }
                 else
                 {
                     var commandKey = view.name.capitalize() + 'View'
                     command = 'activitusbar.toggle' + commandKey;
                     viewNames.push( view.name );
-                    buttons[ view.name ] = addButton( view.octicon, command, view.name, view.tooltip );
+                    buttons[ view.name ] = addButton( view.codicon ? view.codicon : view.octicon, command, view.name, view.tooltip );
                     commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
 
                     if( view.name !== 'search' )
@@ -249,66 +249,7 @@ function activate( context )
         createButtons();
     }
 
-    function updateDeprecatedConfiguration()
-    {
-        function migrate( oldConfig )
-        {
-            var newConfig = [];
-
-            Object.keys( oldConfig ).map( v =>
-            {
-                newConfig.push( { name: v, octicon: oldConfig[ v ] } );
-            } );
-
-            return newConfig;
-        }
-
-        var config = vscode.workspace.getConfiguration( 'activitusbar' );
-        var viewConfig = config.views;
-
-        var details = config.inspect( 'views' );
-
-        if( typeof ( viewConfig ) === "string" )
-        {
-            var originalConfig = viewConfig;
-
-            viewConfig = {
-                "explorer": "file-text",
-                "search": "search",
-                "scm": "repo-forked",
-                "debug": "bug",
-                "extensions": "package"
-            };
-
-            Object.keys( viewConfig ).map( v =>
-            {
-                if( originalConfig.indexOf( v ) === -1 )
-                {
-                    viewConfig[ v ] = "";
-                }
-            } );
-
-            config.update( 'views', viewConfig, true ).then( build );
-        }
-        else if( details.globalValue && details.globalValue.constructor !== Array )
-        {
-            config.update( 'views', migrate( details.globalValue ), vscode.ConfigurationTarget.Global ).then( build );
-        }
-        else if( details.workspaceValue && details.workspaceValue.constructor !== Array )
-        {
-            config.update( 'views', migrate( details.workspaceValue ), vscode.ConfigurationTarget.Workspace ).then( build );
-        }
-        else if( details.workspaceFolderValue && details.workspaceFolderValue.constructor !== Array )
-        {
-            config.update( 'views', migrate( details.workspaceFolderValue ), vscode.ConfigurationTarget.WorkspaceFolder ).then( build );
-        }
-        else
-        {
-            build();
-        }
-    }
-
-    updateDeprecatedConfiguration();
+    build();
 }
 
 function deactivate()

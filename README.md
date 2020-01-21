@@ -14,12 +14,12 @@ If required, the position of the icons can be adjusted by changing the value of 
 
 Now that custom view containers are available, the configuration has been extended to support this. To add a button for a custom view, you'll need to find the name of the view's container. One way to find it is to inspect the package.json file of the extension that provides the view. Alternatively, go to *Preferences -> Keyboard Shortcuts*, then click the **keybindings.json** link near the top. If you then scroll to the bottom of the opened file, you should find commands for opening views, e.g. `workbench.view.extension.test`. The portion after the last dot is the name of the view. Note: If the command is not shown, it may already be assigned to a key definition, in which case search the file for `workbench.view.extension` to try to locate it.
 
-Once you have the name of the view, choose an icon (see known issues below) from the list of [octicons](https://octicons.github.com/) and add an entry to `activitusbar.views` with the format **"{ "name": "extension.*&lt;view name&gt;*", "octicon": "*&lt;icon-name&gt;*"}**, e.g.
+Once you have the name of the view, choose an icon (see known issues below) from the list of [codicons](https://microsoft.github.io/vscode-codicons/dist/codicon.html) and add an entry to `activitusbar.views` with the format **"{ "name": "extension.*&lt;view name&gt;*", "codicon": "*&lt;icon-name&gt;*"}**, e.g.
 
 ```
 {
     "name": "extension.test",
-    "octicon": "beaker",
+    "codicon": "beaker",
 }
 ```
 
@@ -33,7 +33,7 @@ Buttons can also be configured to start tasks. Just use "task.*task-label*". For
 ```
 {
     "name": "task.build",
-    "octicon": "tools",
+    "codicon": "tools",
     "tooltip": "Build project"
 }
 ```
@@ -45,7 +45,7 @@ You can also add a button which opens the settings GUI using
 ```
 {
     "name": "settings",
-    "octicon": "gear"
+    "codicon": "gear"
 }
 ```
 
@@ -55,23 +55,23 @@ You can also add a button which opens the settings GUI using
 "activitusbar.views": [
     {
       "name": "explorer",
-      "octicon": "file-text"
+      "codicon": "files"
     },
     {
       "name": "search",
-      "octicon": "search"
+      "codicon": "search"
     },
     {
       "name": "scm",
-      "octicon": "repo-forked"
+      "codicon": "source-control"
     },
     {
       "name": "debug",
-      "octicon": "bug"
+      "codicon": "debug"
     },
     {
       "name": "extensions",
-      "octicon": "package"
+      "codicon": "extensions"
     }
   ]
 ```
