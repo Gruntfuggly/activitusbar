@@ -1,3 +1,5 @@
+# v0.0.22 - 2020-01-21
+
 -  Support extension use in remote workspaces
 
 # v0.0.21 - 2019-08-13

@@ -2,7 +2,7 @@
     "name": "activitusbar",
     "displayName": "Activitus Bar",
     "description": "Save some real estate by recreating the activity bar buttons on the status bar",
-    "version": "0.0.21",
+    "version": "0.0.22",
     "icon": "icon.png",
     "publisher": "Gruntfuggly",
     "keywords": [
@@ -23,7 +23,10 @@
         "*"
     ],
     "main": "./extension",
-    "extensionKind": ["ui", "workspace"],
+    "extensionKind": [
+        "ui",
+        "workspace"
+    ],
     "contributes": {
         "keybindings": [
             {
