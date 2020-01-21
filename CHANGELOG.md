@@ -1,3 +1,5 @@
+# v0.0.23 - 2020-01-21
+
 - Update octicons to codicons
 
 # v0.0.22 - 2020-01-21
