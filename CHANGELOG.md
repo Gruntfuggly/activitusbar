@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.24 - 2020-02-03
+
 - Add support for arbitrary commands
 - Fix markdown issues in README.md and CHANGELOG.md
 
