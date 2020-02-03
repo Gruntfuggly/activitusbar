@@ -16,7 +16,7 @@ Now that custom view containers are available, the configuration has been extend
 
 Once you have the name of the view, choose an icon (see known issues below) from the list of [codicons](https://microsoft.github.io/vscode-codicons/dist/codicon.html) and add an entry to `activitusbar.views` with the format **"{ "name": "extension.*&lt;view name&gt;*", "codicon": "*&lt;icon-name&gt;*"}**, e.g.
 
-```
+```json
 {
     "name": "extension.test",
     "codicon": "beaker",
@@ -30,7 +30,8 @@ One last option is `activitusbar.searchViewInPanel`. If you move the search view
 ### Task Buttons
 
 Buttons can also be configured to start tasks. Just use "task.*task-label*". For example, this:
-```
+
+```json
 {
     "name": "task.build",
     "codicon": "tools",
@@ -56,7 +57,8 @@ will create a button which reloads the window.
 ### Settings Button
 
 You can also add a button which opens the settings GUI using
-```
+
+```json
 {
     "name": "settings",
     "codicon": "gear"
@@ -65,7 +67,7 @@ You can also add a button which opens the settings GUI using
 
 ### Default Configuration
 
-```
+```json
 "activitusbar.views": [
     {
       "name": "explorer",
@@ -102,7 +104,9 @@ You can install the latest version of the extension via the Visual Studio Market
 
 Alternatively, open Visual Studio code, press `Ctrl+P` or `Cmd+P` and type:
 
-    > ext install activitusbar
+```sh
+> ext install activitusbar
+```
 
 ### Source Code
 
