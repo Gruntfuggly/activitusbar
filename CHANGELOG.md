@@ -1,3 +1,5 @@
+- Add support for arbitrary commands
+
 # v0.0.23 - 2020-01-21
 
 - Update octicons to codicons

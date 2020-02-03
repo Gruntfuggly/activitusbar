@@ -154,6 +154,18 @@ function activate( context )
             return button;
         }
 
+        function addCommandButton( label, command )
+        {
+            var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
+            var button = vscode.window.createStatusBarItem( alignment, priority-- );
+            button.text = '$(' + label + ')';
+            button.command = command;
+            button.color = inactiveColour();
+            button.tooltip = "Run command '" + command + "'";
+            button.show();
+            return button;
+        }
+
         function addSettingsButton( label )
         {
             var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
@@ -181,7 +193,7 @@ function activate( context )
             definedViews.forEach( function( view )
             {
                 var command;
-                if( view.name.indexOf( "task." ) === 0 )
+                if( view.name.toLowerCase().indexOf( "task." ) === 0 )
                 {
                     var taskName = view.name.substr( 5 );
                     var dotPosition = taskName.indexOf( '.' );
@@ -201,7 +213,7 @@ function activate( context )
                             {
                                 found = true;
                                 command = 'activitusbar.startTask' + taskName;
-                                buttons[ view.name ] = addTaskButton( view.codicon ? view.codicon : view.octicon, command, taskName, view.tooltip );
+                                buttons[ view.name ] = buttons[ view.name ] = addTaskButton( view.codicon ? view.codicon : view.octicon, command, taskName, view.tooltip );
                                 commands.push( vscode.commands.registerCommand( command, function()
                                 {
                                     vscode.tasks.executeTask( task );
@@ -214,13 +226,18 @@ function activate( context )
                         }
                     } );
                 }
+                else if( view.name.toLowerCase().indexOf( "command." ) === 0 )
+                {
+                    var commandName = view.name.substr( 8 );
+                    buttons[ view.name ] = addCommandButton( view.codicon ? view.codicon : view.octicon, commandName );
+                }
                 else if( view.name.toLowerCase() === "settings" )
                 {
                     buttons[ view.name ] = addSettingsButton( view.codicon ? view.codicon : view.octicon );
                 }
                 else
                 {
-                    var commandKey = view.name.capitalize() + 'View'
+                    var commandKey = view.name.capitalize() + 'View';
                     command = 'activitusbar.toggle' + commandKey;
                     viewNames.push( view.name );
                     buttons[ view.name ] = addButton( view.codicon ? view.codicon : view.octicon, command, view.name, view.tooltip );

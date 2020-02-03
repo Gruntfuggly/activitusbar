@@ -37,7 +37,21 @@ Buttons can also be configured to start tasks. Just use "task.*task-label*". For
     "tooltip": "Build project"
 }
 ```
+
 will create a button with the tools icons which starts the "build" task when the button is clicked.
+
+### Command Buttons
+
+Buttons can also be configured to run arbitrary commands. Use "command.*command-name*". For example,
+
+```json
+{
+    "name": "command.workbench.action.reloadWindow",
+    "codicon": "refresh"
+}
+```
+
+will create a button which reloads the window.
 
 ### Settings Button
 
