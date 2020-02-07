@@ -1,5 +1,8 @@
 # Activitus Bar Change Log
 
+- Fix tooltips for task, command and setting buttons
+- Add support for optional labels
+
 ## v0.0.24 - 2020-02-03
 
 - Add support for arbitrary commands

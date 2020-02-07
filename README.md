@@ -4,7 +4,7 @@ One of my work colleagues was complaining about the activity bar wasting too muc
 
 ## Configuration
 
-The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, their associated icons and an optional tooltip. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions. (*See Default Configuration below*).
+The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, their associated icons and optional tooltips or labels. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions. (*See Default Configuration below*).
 
 This extension also rebinds the view selection keys. If you have modified the default key bindings, this may be an issue.
 
@@ -64,6 +64,8 @@ You can also add a button which opens the settings GUI using
     "codicon": "gear"
 }
 ```
+
+*Note: Buttons can all have optional tooltips and labels specified. Labels are added to the right of the icon.*
 
 ### Default Configuration
 
