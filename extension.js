@@ -24,7 +24,7 @@ function activate( context )
 
     function inactiveColour()
     {
-        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' ) || new vscode.ThemeColor( 'statusBar.foreground' );
+        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' );
     }
 
     function activeColour()
