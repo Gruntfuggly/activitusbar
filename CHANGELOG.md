@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.27 - 2020-04-15
+
 - Support alternate status bar modes, thanks to [notpushkin](https://github.com/notpushkin)
 
 ## v0.0.26 - 2020-03-24
