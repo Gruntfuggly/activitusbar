@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.28 - 2020-04-21
+
 - Unless overridden by configuration, use theme colours with inactive dimmed to 50%
 
 ## v0.0.27 - 2020-04-15
