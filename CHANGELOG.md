@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Unless overridden by configuration, use theme colours with inactive dimmed to 50%
+
 ## v0.0.27 - 2020-04-15
 
 - Support alternate status bar modes, thanks to [notpushkin](https://github.com/notpushkin)

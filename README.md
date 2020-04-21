@@ -8,7 +8,7 @@ The buttons are configurable, using `activitusbar.views`. This is a array contai
 
 This extension also rebinds the view selection keys. If you have modified the default key bindings, this may be an issue.
 
-The colour of the active and inactive buttons can also be specified using `activitusbar.activeColour` and `activitusbar.inactiveColour`.
+The colour of the active and inactive buttons can also be specified using `activitusbar.activeColour` and `activitusbar.inactiveColour`. If the colours are not specified in the configuration, the standard status bar colour will be used with inactive buttons dimmed.
 
 If required, the position of the icons can be adjusted by changing the value of `activitusbar.priority` and `activitusbar.alignment`. The defaults are `99999` and `Left` which should place them at the far left or the status bar. Depending on what other extensions are installed, you may need to experiment to find a value which suits. For example, to move everything to the far right, try `Right` and `-99999`.
 
