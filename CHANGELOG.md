@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.29 - 2020-04-27
+
 - Revert to previous version to avoid annoying editor being temporarily created
 
 ## v0.0.28 - 2020-04-21
