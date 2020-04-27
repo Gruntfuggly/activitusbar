@@ -1,10 +1,8 @@
 
 var vscode = require( 'vscode' );
-var theme = require( './theme.js' );
 
 function activate( context )
 {
-    var colours;
     var viewNames = [];
     var commands = [];
     var buttons = [];
@@ -26,39 +24,12 @@ function activate( context )
 
     function inactiveColour()
     {
-        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' );
-        if( !colour && colours )
-        {
-            colour = colours[ 'statusBar.foreground' ];
-            var hex = colour.split( / / )[ 0 ].replace( /[^\da-fA-F]/g, '' );
-            if( hex.length === 3 )
-            {
-                colour = '#' + hex + '8';
-            }
-            else if( hex.length === 4 )
-            {
-                colour = '#' + hex.substr( 0, 3 ) + parseInt( hex.substr( 3, 1 ), 16 ) / 2;
-            }
-            else if( hex.length === 6 )
-            {
-                colour = '#' + hex + '80';
-            }
-            else if( hex.length === 4 )
-            {
-                colour = '#' + hex.substr( 0, 6 ) + parseInt( hex.substr( 6, 2 ), 16 ) / 2;
-            }
-        }
-        return colour;
+        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' );
     }
 
     function activeColour()
     {
-        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
-        if( !colour && colours )
-        {
-            colour = colours[ 'statusBar.foreground' ];
-        }
-        return colour;
+        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
     }
 
     function build()
@@ -209,79 +180,74 @@ function activate( context )
 
         function createButtons()
         {
-            theme.getTokenColours( function( tokenColours )
+            Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
+            buttons = [];
+            commands.forEach( command => command.dispose() );
+            commands = [];
+
+            var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).views;
+            startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );;
+
+            priority = startingPriority;
+
+            definedViews.forEach( function( view )
             {
-                colours = tokenColours;
-
-                Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
-                buttons = [];
-                commands.forEach( command => command.dispose() );
-                commands = [];
-
-                var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).views;
-                startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );;
-
-                priority = startingPriority;
-
-                definedViews.forEach( function( view )
+                var command;
+                if( view.name.toLowerCase().indexOf( "task." ) === 0 )
                 {
-                    var command;
-                    if( view.name.toLowerCase().indexOf( "task." ) === 0 )
+                    var taskName = view.name.substr( 5 );
+                    var dotPosition = taskName.indexOf( '.' );
+                    var workspace;
+                    if( dotPosition > -1 )
                     {
-                        var taskName = view.name.substr( 5 );
-                        var dotPosition = taskName.indexOf( '.' );
-                        var workspace;
-                        if( dotPosition > -1 )
-                        {
-                            workspace = taskName.substr( 0, dotPosition );
-                            taskName = taskName.substr( dotPosition + 1 );
-                        }
+                        workspace = taskName.substr( 0, dotPosition );
+                        taskName = taskName.substr( dotPosition + 1 );
+                    }
 
-                        vscode.tasks.fetchTasks().then( function( availableTasks )
+                    vscode.tasks.fetchTasks().then( function( availableTasks )
+                    {
+                        var found = false;
+                        availableTasks.map( function( task )
                         {
-                            var found = false;
-                            availableTasks.map( function( task )
+                            if( task.name === taskName && ( workspace === undefined || task.scope.name === workspace ) )
                             {
-                                if( task.name === taskName && ( workspace === undefined || task.scope.name === workspace ) )
+                                found = true;
+                                command = 'activitusbar.startTask' + taskName;
+                                buttons[ view.name ] = buttons[ view.name ] = addTaskButton( view.codicon ? view.codicon : view.octicon, command, taskName, view.tooltip, view.label );
+                                commands.push( vscode.commands.registerCommand( command, function()
                                 {
-                                    found = true;
-                                    command = 'activitusbar.startTask' + taskName;
-                                    buttons[ view.name ] = buttons[ view.name ] = addTaskButton( view.codicon ? view.codicon : view.octicon, command, taskName, view.tooltip, view.label );
-                                    commands.push( vscode.commands.registerCommand( command, function()
-                                    {
-                                        vscode.tasks.executeTask( task );
-                                    } ) );
-                                }
-                            } );
-                            if( found === false )
-                            {
-                                vscode.window.showErrorMessage( "Failed to create button for task '" + taskName + "'" );
+                                    vscode.tasks.executeTask( task );
+                                } ) );
                             }
                         } );
-                    }
-                    else if( view.name.toLowerCase().indexOf( "command." ) === 0 )
-                    {
-                        var commandName = view.name.substr( 8 );
-                        buttons[ view.name ] = addCommandButton( view.codicon ? view.codicon : view.octicon, commandName, view.tooltip, view.label );
-                    }
-                    else if( view.name.toLowerCase() === "settings" )
-                    {
-                        buttons[ view.name ] = addSettingsButton( view.codicon ? view.codicon : view.octicon, view.tooltip, view.label );
-                    }
-                    else
-                    {
-                        var commandKey = view.name.capitalize() + 'View';
-                        command = 'activitusbar.toggle' + commandKey;
-                        viewNames.push( view.name );
-                        buttons[ view.name ] = addButton( view.codicon ? view.codicon : view.octicon, command, view.name, view.tooltip, view.label );
-                        commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
-
-                        if( view.name !== 'search' )
+                        if( found === false )
                         {
-                            commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view.name ) ) );
+                            vscode.window.showErrorMessage( "Failed to create button for task '" + taskName + "'" );
                         }
+                    } );
+                }
+                else if( view.name.toLowerCase().indexOf( "command." ) === 0 )
+                {
+                    var commandName = view.name.substr( 8 );
+                    buttons[ view.name ] = addCommandButton( view.codicon ? view.codicon : view.octicon, commandName, view.tooltip, view.label );
+                }
+                else if( view.name.toLowerCase() === "settings" )
+                {
+                    buttons[ view.name ] = addSettingsButton( view.codicon ? view.codicon : view.octicon, view.tooltip, view.label );
+                }
+                else
+                {
+                    var commandKey = view.name.capitalize() + 'View';
+                    command = 'activitusbar.toggle' + commandKey;
+                    viewNames.push( view.name );
+                    buttons[ view.name ] = addButton( view.codicon ? view.codicon : view.octicon, command, view.name, view.tooltip, view.label );
+                    commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
+
+                    if( view.name !== 'search' )
+                    {
+                        commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view.name ) ) );
                     }
-                } );
+                }
             } );
         }
 

@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Revert to previous version to avoid annoying editor being temporarily created
+
 ## v0.0.28 - 2020-04-21
 
 - Unless overridden by configuration, use theme colours with inactive dimmed to 50%

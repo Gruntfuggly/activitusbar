@@ -93,11 +93,11 @@
                 },
                 "activitusbar.inactiveColour": {
                     "type": "string",
-                    "description": "Override colour of inactive icons"
+                    "description": "Colour of inactive icons"
                 },
                 "activitusbar.activeColour": {
                     "type": "string",
-                    "description": "Override colour of the active icon"
+                    "description": "Colour of the active icon"
                 },
                 "activitusbar.priority": {
                     "type": "integer",
