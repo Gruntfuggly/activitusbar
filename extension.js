@@ -24,12 +24,22 @@ function activate( context )
 
     function inactiveColour()
     {
-        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' );
+        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' );
+        if( !colour )
+        {
+            colour = new vscode.ThemeColor( 'activityBar.inactiveForeground' );
+        }
+        return colour;
     }
 
     function activeColour()
     {
-        return vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
+        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
+        if( !colour )
+        {
+            colour = new vscode.ThemeColor( 'activityBar.foreground' );
+        }
+        return colour;
     }
 
     function build()
