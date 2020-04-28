@@ -4,11 +4,13 @@ One of my work colleagues was complaining about the activity bar wasting too muc
 
 ## Configuration
 
-The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, their associated icons and optional tooltips or labels. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions. (*See Default Configuration below*).
+The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, their associated icons and optional tooltips or labels. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions. (*See Default Configuration below*). When overriding the default settings, default icons will be used if not specified.
 
-This extension also rebinds the view selection keys. If you have modified the default key bindings, this may be an issue.
+This extension also rebinds the main view selection keys. If you have modified the default key bindings, this may be an issue.
 
-The colour of the active and inactive buttons can also be specified using `activitusbar.activeColour` and `activitusbar.inactiveColour`. The configuration accepts either theme colour names (e.g. `editor.foreground`, see <https://code.visualstudio.com/api/references/theme-color> for the full list) or hex colour codes (e.g. `#ff0000`). If the colours are not specified in the configuration, the current status bar foreground (`statusBar.foreground`) and the inactive activity bar icon (`activityBar.inactiveForeground`) are used.
+The panel views Terminal, Problems, Output and Debug Console can now also be moved to the activity bar. The extension supports these using the names "terminal", "problems", "output" and "debugConsole", again with default icons. These buttons will still work if the panel views are kept in the default location, but the views will not hide again if `activitusbar.toggleSidebar` is enabled.
+
+The colour of the active and inactive buttons can also be specified using `activitusbar.activeColour` and `activitusbar.inactiveColour`. The configuration accepts either theme colour names (e.g. `editor.foreground`, see <https://code.visualstudio.com/api/references/theme-color> for the full list), standard HTML/CSS colour names or hex colour codes (e.g. `#ff0000`). If the colours are not specified in the configuration, the current status bar foreground (`statusBar.foreground`) and the inactive activity bar icon (`activityBar.inactiveForeground`) are used.
 
 If required, the position of the icons can be adjusted by changing the value of `activitusbar.priority` and `activitusbar.alignment`. The defaults are `99999` and `Left` which should place them at the far left or the status bar. Depending on what other extensions are installed, you may need to experiment to find a value which suits. For example, to move everything to the far right, try `Right` and `-99999`.
 

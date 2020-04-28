@@ -9,13 +9,59 @@ function activate( context )
     var commands = [];
     var buttons = [];
     var open = 'hide';
-    var tooltips = {
-        "explorer": "Explorer",
-        "search": "Search",
-        "scm": "Source Control",
-        "debug": "Debug",
-        "extensions": "Extensions"
+
+    var mapping = {
+        "settings": {
+            "codicon": "settings-gear",
+            "tooltip": "Settings"
+        },
+        "explorer": {
+            "codicon": "files",
+            "tooltip": "Explorer",
+            "command": "workbench.view.explorer"
+        },
+        "search": {
+            "codicon": "search",
+            "tooltip": "Search",
+            "command": "workbench.view.search"
+        },
+        "scm": {
+            "codicon": "source-control",
+            "tooltip": "Source Control",
+            "command": "workbench.view.scm"
+        },
+        "debug": {
+            "codicon": "debug-alt-2",
+            "tooltip": "Debug",
+            "command": "workbench.view.debug"
+        },
+        "extensions": {
+            "codicon": "extensions",
+            "tooltip": "Extensions",
+            "command": "workbench.view.extensions"
+        },
+        "problems": {
+            "codicon": "warning",
+            "tooltip": "Problems",
+            "command": "workbench.actions.view.problems"
+        },
+        "output": {
+            "codicon": "output",
+            "tooltip": "Output",
+            "command": "workbench.panel.output.focus"
+        },
+        "terminal": {
+            "codicon": "terminal",
+            "tooltip": "Terminal",
+            "command": "workbench.panel.terminal.focus"
+        },
+        "debugConsole": {
+            "codicon": "debug-console",
+            "tooltip": "Debug Console",
+            "command": "workbench.debug.action.toggleRepl"
+        }
     };
+
     var priority;
     var startingPriority;
 
@@ -76,7 +122,8 @@ function activate( context )
         function showView( view )
         {
             deselect();
-            vscode.commands.executeCommand( 'workbench.view.' + view );
+            var command = mapping[ view ] ? mapping[ view ].command : 'workbench.view.' + view;
+            vscode.commands.executeCommand( command );
             if( buttons[ view ] )
             {
                 buttons[ view ].color = activeColour();
@@ -159,7 +206,7 @@ function activate( context )
             var button = vscode.window.createStatusBarItem( alignment, priority-- );
             button.text = '$(' + icon + ')' + ( label ? ' ' + label : '' );
             button.command = command;
-            button.tooltip = tooltip ? tooltip : tooltips[ viewName ];
+            button.tooltip = tooltip ? tooltip : ( mapping[ viewName ] ? mapping[ viewName ].tooltip : "" );
             button.color = inactiveColour();
             if( open === viewName )
             {
@@ -206,6 +253,16 @@ function activate( context )
             return button;
         }
 
+        function getIcon( view )
+        {
+            var icon = view.codicon ? view.codicon : view.octicon;
+            if( !icon )
+            {
+                icon = mapping[ view.name ] ? mapping[ view.name ].codicon : "smiley";
+            }
+            return icon;
+        }
+
         function createButtons()
         {
             Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
@@ -241,7 +298,7 @@ function activate( context )
                             {
                                 found = true;
                                 command = 'activitusbar.startTask' + taskName;
-                                buttons[ view.name ] = buttons[ view.name ] = addTaskButton( view.codicon ? view.codicon : view.octicon, command, taskName, view.tooltip, view.label );
+                                buttons[ view.name ] = buttons[ view.name ] = addTaskButton( getIcon( view ), command, taskName, view.tooltip, view.label );
                                 commands.push( vscode.commands.registerCommand( command, function()
                                 {
                                     vscode.tasks.executeTask( task );
@@ -257,18 +314,18 @@ function activate( context )
                 else if( view.name.toLowerCase().indexOf( "command." ) === 0 )
                 {
                     var commandName = view.name.substr( 8 );
-                    buttons[ view.name ] = addCommandButton( view.codicon ? view.codicon : view.octicon, commandName, view.tooltip, view.label );
+                    buttons[ view.name ] = addCommandButton( getIcon( view ), commandName, view.tooltip, view.label );
                 }
                 else if( view.name.toLowerCase() === "settings" )
                 {
-                    buttons[ view.name ] = addSettingsButton( view.codicon ? view.codicon : view.octicon, view.tooltip, view.label );
+                    buttons[ view.name ] = addSettingsButton( getIcon( view ), view.tooltip, view.label );
                 }
                 else
                 {
                     var commandKey = view.name.capitalize() + 'View';
                     command = 'activitusbar.toggle' + commandKey;
                     viewNames.push( view.name );
-                    buttons[ view.name ] = addButton( view.codicon ? view.codicon : view.octicon, command, view.name, view.tooltip, view.label );
+                    buttons[ view.name ] = addButton( getIcon( view ), command, view.name, view.tooltip, view.label );
                     commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
 
                     if( view.name !== 'search' )
