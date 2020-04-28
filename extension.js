@@ -37,7 +37,7 @@ function activate( context )
         var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
         if( !colour )
         {
-            colour = new vscode.ThemeColor( 'activityBar.foreground' );
+            colour = new vscode.ThemeColor( 'statusBar.foreground' );
         }
         return colour;
     }
