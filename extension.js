@@ -29,6 +29,10 @@ function activate( context )
         {
             colour = new vscode.ThemeColor( 'activityBar.inactiveForeground' );
         }
+        else if( colour.trim()[ 0 ] !== '#' )
+        {
+            colour = new vscode.ThemeColor( colour );
+        }
         return colour;
     }
 
@@ -38,6 +42,10 @@ function activate( context )
         if( !colour )
         {
             colour = new vscode.ThemeColor( 'statusBar.foreground' );
+        }
+        else if( colour.trim()[ 0 ] !== '#' )
+        {
+            colour = new vscode.ThemeColor( colour );
         }
         return colour;
     }
