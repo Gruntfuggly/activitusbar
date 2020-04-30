@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.32 - 2020-05-01
+
 - Validate colour and theme colour names
 - Add default icons
 - Use correct icons
