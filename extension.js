@@ -1,5 +1,7 @@
 
 var vscode = require( 'vscode' );
+var colourNames = require( './colourNames.js' );
+var themeColourNames = require( './themeColourNames.js' );
 
 function activate( context )
 {
@@ -22,32 +24,40 @@ function activate( context )
         return this.replace( /(?:^|\s)\S/g, function( a ) { return a.toUpperCase(); } );
     };
 
-    function inactiveColour()
+    function getColour( setting, defaultColour )
     {
-        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'inactiveColour' );
+        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( setting ).trim();
+        if( colour && colourNames.indexOf( colour.toLowerCase() ) === -1 )
+        {
+            if( colour[ 0 ] !== '#' )
+            {
+                if( themeColourNames.indexOf( colour ) !== -1 )
+                {
+                    colour = new vscode.ThemeColor( colour );
+                }
+                else
+                {
+                    vscode.window.showInformationMessage( "Unrecognised theme colour:" + colour );
+                    colour = undefined;
+                }
+            }
+        }
         if( !colour )
         {
-            colour = new vscode.ThemeColor( 'activityBar.inactiveForeground' );
-        }
-        else if( colour.trim()[ 0 ] !== '#' )
-        {
-            colour = new vscode.ThemeColor( colour );
+            colour = new vscode.ThemeColor( defaultColour );
         }
         return colour;
+
+    }
+
+    function inactiveColour()
+    {
+        return getColour( 'inactiveColour', 'activityBar.inactiveForeground' );
     }
 
     function activeColour()
     {
-        var colour = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'activeColour' );
-        if( !colour )
-        {
-            colour = new vscode.ThemeColor( 'statusBar.foreground' );
-        }
-        else if( colour.trim()[ 0 ] !== '#' )
-        {
-            colour = new vscode.ThemeColor( colour );
-        }
-        return colour;
+        return getColour( 'activeColour', 'activityBar.foreground' );
     }
 
     function build()

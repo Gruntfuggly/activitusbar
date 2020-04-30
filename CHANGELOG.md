@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Validate colour and theme colour names
+
 ## v0.0.31 - 2020-04-28
 
 - Use the status bar foreground for active icons by default
