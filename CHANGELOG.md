@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.34 - 2020-05-13
+
 - Allow spacers in combined workspace settings
 
 ## v0.0.33 - 2020-05-13
