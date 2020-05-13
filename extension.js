@@ -153,6 +153,7 @@ function activate( context )
                     {
                         buttons[ view ].color = activeColour();
                     }
+                    showView( view );
                 }
                 if( open === 'hide' )
                 {

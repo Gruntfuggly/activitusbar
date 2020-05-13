@@ -1,5 +1,6 @@
 # Activitus Bar Change Log
 
+- Reshow the view even if the extension thinks its active (when toggle is disabled)
 ## v0.0.32 - 2020-05-01
 
 - Validate colour and theme colour names
