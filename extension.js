@@ -8,6 +8,7 @@ function activate( context )
     var viewNames = [];
     var commands = [];
     var buttons = [];
+    var spacers = [];
     var open = 'hide';
 
     var mapping = {
@@ -201,6 +202,17 @@ function activate( context )
             };
         }
 
+        function addSpacer( icon )
+        {
+            var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
+            var button = vscode.window.createStatusBarItem( alignment, priority-- );
+            button.text = icon ? '$(' + icon + ')' : ' ';
+            button.color = inactiveColour();
+            button.show();
+
+            return button;
+        }
+
         function addButton( icon, command, viewName, tooltip, label )
         {
             var alignment = vscode.StatusBarAlignment[ vscode.workspace.getConfiguration( 'activitusbar' ).get( 'alignment', "Left" ) ];
@@ -257,7 +269,7 @@ function activate( context )
         function getIcon( view )
         {
             var icon = view.codicon ? view.codicon : view.octicon;
-            if( !icon )
+            if( !icon && view.name )
             {
                 icon = mapping[ view.name ] ? mapping[ view.name ].codicon : "smiley";
             }
@@ -266,20 +278,25 @@ function activate( context )
 
         function createButtons()
         {
+            spacers.forEach( button => button.dispose() );
             Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
             buttons = [];
             commands.forEach( command => command.dispose() );
             commands = [];
 
             var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).views;
-            startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );;
+            startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );
 
             priority = startingPriority;
 
             definedViews.forEach( function( view )
             {
                 var command;
-                if( view.name.toLowerCase().indexOf( "task." ) === 0 )
+                if( !view.name )
+                {
+                    spacers.push( addSpacer( getIcon( view ) ) );
+                }
+                else if( view.name.toLowerCase().indexOf( "task." ) === 0 )
                 {
                     var taskName = view.name.substr( 5 );
                     var dotPosition = taskName.indexOf( '.' );

@@ -29,6 +29,16 @@ By default, clicking a button again will toggle the sidebar so that it is not vi
 
 One last option is `activitusbar.searchViewInPanel`. If you move the search view to the panel (using the context menu) then set this to true to allow the panel to be toggled instead of the sidebar. *Note: Don't set this to true with the search view in the normal position!*
 
+### Separators
+
+You can add spaces between buttons by including an empty object (`{}`) in the view list. If you want a spacer with an icon, just include an icon without a view name, e.g.
+
+```json
+{
+    "codicon": "kebab-vertical"
+}
+```
+
 ### Task Buttons
 
 Buttons can also be configured to start tasks. Just use "task.*task-label*". For example, this:
