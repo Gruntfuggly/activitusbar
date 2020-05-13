@@ -291,10 +291,7 @@ function activate( context )
                 definedViews = views.globalValue;
                 views.workspaceValue.map( function( view )
                 {
-                    if( view.name )
-                    {
-                        definedViews.push( view );
-                    }
+                    definedViews.push( view );
                 } );
             }
 

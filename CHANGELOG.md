@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Allow spacers in combined workspace settings
+
 ## v0.0.33 - 2020-05-13
 
 - Reshow the view even if the extension thinks its active (when toggle is disabled)
