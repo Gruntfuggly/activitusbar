@@ -27,6 +27,8 @@ Once you have the name of the view, choose an icon (see known issues below) from
 
 By default, clicking a button again will toggle the sidebar so that it is not visible. If you want to disable this behaviour, set `activitusbar.toggleSidebar` to false.
 
+Normally configuration in your workspace settings overwrites your user settings. If you want to have a base set of buttons in your user settings and then have additional buttons on a per workspace basis, set `activitusbar.combineWorkspaceSettings` to `true`. This will then combine the settings together for each vscode window.
+
 One last option is `activitusbar.searchViewInPanel`. If you move the search view to the panel (using the context menu) then set this to true to allow the panel to be toggled instead of the sidebar. *Note: Don't set this to true with the search view in the normal position!*
 
 ### Separators

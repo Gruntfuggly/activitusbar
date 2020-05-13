@@ -2,6 +2,7 @@
 
 - Reshow the view even if the extension thinks its active (when toggle is disabled)
 - Allow separators to be configured
+- Support combining of workspace and user settings
 
 ## v0.0.32 - 2020-05-01
 

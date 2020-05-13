@@ -121,7 +121,12 @@
                 "activitusbar.searchViewInPanel": {
                     "type": "boolean",
                     "description": "Set this to true if you use the search view in the bottom panel instead of the side bar. Do not set this to true when the search view is in the normal location!",
-                    "default": "false"
+                    "default": false
+                },
+                "activitusbar.combineWorkspaceSettings": {
+                    "type": "boolean",
+                    "description": "Set this to true to combine any workspace settings into the user settings instead of overwritting them",
+                    "default": false
                 }
             }
         }

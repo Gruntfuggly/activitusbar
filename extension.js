@@ -7,7 +7,7 @@ function activate( context )
 {
     var viewNames = [];
     var commands = [];
-    var buttons = [];
+    var buttons = {};
     var spacers = [];
     var open = 'hide';
 
@@ -280,78 +280,97 @@ function activate( context )
         {
             spacers.forEach( button => button.dispose() );
             Object.keys( buttons ).forEach( button => buttons[ button ].dispose() );
-            buttons = [];
+            buttons = {};
             commands.forEach( command => command.dispose() );
             commands = [];
 
-            var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).views;
+            var views = vscode.workspace.getConfiguration( 'activitusbar' ).inspect( 'views' );
+            var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'views' );
+            if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'combineWorkspaceSettings' ) )
+            {
+                definedViews = views.globalValue;
+                views.workspaceValue.map( function( view )
+                {
+                    if( view.name )
+                    {
+                        definedViews.push( view );
+                    }
+                } );
+            }
+
             startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );
 
             priority = startingPriority;
 
-            definedViews.forEach( function( view )
+            if( definedViews )
             {
-                var command;
-                if( !view.name )
+                definedViews.forEach( function( view )
                 {
-                    spacers.push( addSpacer( getIcon( view ) ) );
-                }
-                else if( view.name.toLowerCase().indexOf( "task." ) === 0 )
-                {
-                    var taskName = view.name.substr( 5 );
-                    var dotPosition = taskName.indexOf( '.' );
-                    var workspace;
-                    if( dotPosition > -1 )
+                    var command;
+                    if( !view.name )
                     {
-                        workspace = taskName.substr( 0, dotPosition );
-                        taskName = taskName.substr( dotPosition + 1 );
+                        spacers.push( addSpacer( getIcon( view ) ) );
                     }
-
-                    vscode.tasks.fetchTasks().then( function( availableTasks )
+                    else if( !buttons.hasOwnProperty( view.name ) )
                     {
-                        var found = false;
-                        availableTasks.map( function( task )
+                        if( view.name.toLowerCase().indexOf( "task." ) === 0 )
                         {
-                            if( task.name === taskName && ( workspace === undefined || task.scope.name === workspace ) )
+                            var taskName = view.name.substr( 5 );
+                            var dotPosition = taskName.indexOf( '.' );
+                            var workspace;
+                            if( dotPosition > -1 )
                             {
-                                found = true;
-                                command = 'activitusbar.startTask' + taskName;
-                                buttons[ view.name ] = buttons[ view.name ] = addTaskButton( getIcon( view ), command, taskName, view.tooltip, view.label );
-                                commands.push( vscode.commands.registerCommand( command, function()
-                                {
-                                    vscode.tasks.executeTask( task );
-                                } ) );
+                                workspace = taskName.substr( 0, dotPosition );
+                                taskName = taskName.substr( dotPosition + 1 );
                             }
-                        } );
-                        if( found === false )
-                        {
-                            vscode.window.showErrorMessage( "Failed to create button for task '" + taskName + "'" );
-                        }
-                    } );
-                }
-                else if( view.name.toLowerCase().indexOf( "command." ) === 0 )
-                {
-                    var commandName = view.name.substr( 8 );
-                    buttons[ view.name ] = addCommandButton( getIcon( view ), commandName, view.tooltip, view.label );
-                }
-                else if( view.name.toLowerCase() === "settings" )
-                {
-                    buttons[ view.name ] = addSettingsButton( getIcon( view ), view.tooltip, view.label );
-                }
-                else
-                {
-                    var commandKey = view.name.capitalize() + 'View';
-                    command = 'activitusbar.toggle' + commandKey;
-                    viewNames.push( view.name );
-                    buttons[ view.name ] = addButton( getIcon( view ), command, view.name, view.tooltip, view.label );
-                    commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
 
-                    if( view.name !== 'search' )
-                    {
-                        commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view.name ) ) );
+                            vscode.tasks.fetchTasks().then( function( availableTasks )
+                            {
+                                var found = false;
+                                availableTasks.map( function( task )
+                                {
+                                    if( task.name === taskName && ( workspace === undefined || task.scope.name === workspace ) )
+                                    {
+                                        found = true;
+                                        command = 'activitusbar.startTask' + taskName;
+                                        buttons[ view.name ] = buttons[ view.name ] = addTaskButton( getIcon( view ), command, taskName, view.tooltip, view.label );
+                                        commands.push( vscode.commands.registerCommand( command, function()
+                                        {
+                                            vscode.tasks.executeTask( task );
+                                        } ) );
+                                    }
+                                } );
+                                if( found === false )
+                                {
+                                    vscode.window.showErrorMessage( "Failed to create button for task '" + taskName + "'" );
+                                }
+                            } );
+                        }
+                        else if( view.name.toLowerCase().indexOf( "command." ) === 0 )
+                        {
+                            var commandName = view.name.substr( 8 );
+                            buttons[ view.name ] = addCommandButton( getIcon( view ), commandName, view.tooltip, view.label );
+                        }
+                        else if( view.name.toLowerCase() === "settings" )
+                        {
+                            buttons[ view.name ] = addSettingsButton( getIcon( view ), view.tooltip, view.label );
+                        }
+                        else
+                        {
+                            var commandKey = view.name.capitalize() + 'View';
+                            command = 'activitusbar.toggle' + commandKey;
+                            viewNames.push( view.name );
+                            buttons[ view.name ] = addButton( getIcon( view ), command, view.name, view.tooltip, view.label );
+                            commands.push( vscode.commands.registerCommand( command, makeToggleView( view.name ) ) );
+
+                            if( view.name !== 'search' )
+                            {
+                                commands.push( vscode.commands.registerCommand( 'activitusbar.show' + commandKey, makeShowView( view.name ) ) );
+                            }
+                        }
                     }
-                }
-            } );
+                } );
+            }
         }
 
         context.subscriptions.push(
