@@ -1,6 +1,7 @@
 # Activitus Bar Change Log
 
 - Make it clearer where to find view name, thanks to [dkniffin](https://github.com/dkniffin)
+- Fix error when no settings are defined and combine is selected
 
 ## v0.0.34 - 2020-05-13
 

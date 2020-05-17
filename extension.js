@@ -286,13 +286,16 @@ function activate( context )
 
             var views = vscode.workspace.getConfiguration( 'activitusbar' ).inspect( 'views' );
             var definedViews = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'views' );
-            if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'combineWorkspaceSettings' ) )
+            if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'combineWorkspaceSettings' ) && views.globalValue )
             {
                 definedViews = views.globalValue;
-                views.workspaceValue.map( function( view )
+                if( views.workspaceValue )
                 {
-                    definedViews.push( view );
-                } );
+                    views.workspaceValue.map( function( view )
+                    {
+                        definedViews.push( view );
+                    } );
+                }
             }
 
             startingPriority = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'priority', '99999' );
