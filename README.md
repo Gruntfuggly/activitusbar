@@ -108,6 +108,17 @@ You can also add a button which opens the settings GUI using
   ]
 ```
 
+### Extensions
+
+You can also show extensions if you know the name of the view.
+
+```json
+{
+    "name": "remote",
+    "codicon": "remote-explorer",
+}
+```
+
 ## Known Issues
 
 Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used.
