@@ -32,7 +32,7 @@ function activate( context )
             "command": "workbench.view.scm"
         },
         "debug": {
-            "codicon": "debug-alt-2",
+            "codicon": "debug",
             "tooltip": "Debug",
             "command": "workbench.view.debug"
         },
