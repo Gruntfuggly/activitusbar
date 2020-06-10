@@ -1,7 +1,12 @@
 # Activitus Bar Change Log
 
+## v0.0.36
+
 - Make it clearer where to find view name, thanks to [dkniffin](https://github.com/dkniffin)
 - Fix error when no settings are defined and combine is selected
+
+## v0.0.35 - 2020-10-03
+
 - Fix default debug button icon
 
 ## v0.0.34 - 2020-05-13
