@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Make it clearer where to find view name, thanks to [dkniffin](https://github.com/dkniffin)
+
 ## v0.0.34 - 2020-05-13
 
 - Allow spacers in combined workspace settings
