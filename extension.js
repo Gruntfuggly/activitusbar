@@ -54,7 +54,7 @@ function activate( context )
         "terminal": {
             "codicon": "terminal",
             "tooltip": "Terminal",
-            "command": "workbench.panel.terminal.focus"
+            "command": "workbench.action.terminal.focus"
         },
         "debugConsole": {
             "codicon": "debug-console",

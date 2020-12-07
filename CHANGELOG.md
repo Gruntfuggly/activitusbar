@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Fix terminal opening command
+
 ## v0.0.36
 
 - Make it clearer where to find view name, thanks to [dkniffin](https://github.com/dkniffin)
