@@ -1,8 +1,10 @@
 # Activitus Bar Change Log
 
+## v0.0.37 - 2020-12-07
+
 - Fix terminal opening command
 
-## v0.0.36
+## v0.0.36 - 2020-10-06
 
 - Make it clearer where to find view name, thanks to [dkniffin](https://github.com/dkniffin)
 - Fix error when no settings are defined and combine is selected
