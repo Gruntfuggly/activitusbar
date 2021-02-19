@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.38 - 2021-02-19
+
 - Remove overridden keybindings (moved to README.md)
 
 ## v0.0.37 - 2020-12-07
