@@ -29,38 +29,6 @@
         "workspace"
     ],
     "contributes": {
-        "keybindings": [
-            {
-                "command": "activitusbar.showExplorerView",
-                "key": "ctrl+shift+E",
-                "mac": "shift+cmd+E"
-            },
-            {
-                "command": "activitusbar.showSearchViewWithSelection",
-                "key": "ctrl+shift+F",
-                "mac": "shift+cmd+F"
-            },
-            {
-                "command": "activitusbar.showReplaceViewWithSelection",
-                "key": "ctrl+shift+H",
-                "mac": "shift+cmd+H"
-            },
-            {
-                "command": "activitusbar.showScmView",
-                "key": "ctrl+shift+G",
-                "mac": "ctrl+shift+G"
-            },
-            {
-                "command": "activitusbar.showDebugView",
-                "key": "ctrl+shift+D",
-                "mac": "shift+cmd+D"
-            },
-            {
-                "command": "activitusbar.showExtensionsView",
-                "key": "ctrl+shift+X",
-                "mac": "shift+cmd+X"
-            }
-        ],
         "configuration": {
             "type": "object",
             "title": "Activitus Bar",

@@ -108,6 +108,43 @@ You can also add a button which opens the settings GUI using
   ]
 ```
 
+### Keybindings
+
+You may want to override the default keybindings in order to use them with activitusbar:
+
+```json
+{
+  "command": "activitusbar.showExplorerView",
+  "key": "ctrl+shift+E",
+  "mac": "shift+cmd+E"
+},
+{
+  "command": "activitusbar.showSearchViewWithSelection",
+  "key": "ctrl+shift+F",
+  "mac": "shift+cmd+F"
+},
+{
+  "command": "activitusbar.showReplaceViewWithSelection",
+  "key": "ctrl+shift+H",
+  "mac": "shift+cmd+H"
+},
+{
+  "command": "activitusbar.showScmView",
+  "key": "ctrl+shift+G",
+  "mac": "ctrl+shift+G"
+},
+{
+  "command": "activitusbar.showDebugView",
+  "key": "ctrl+shift+D",
+  "mac": "shift+cmd+D"
+},
+{
+  "command": "activitusbar.showExtensionsView",
+  "key": "ctrl+shift+X",
+  "mac": "shift+cmd+X"
+}
+```
+
 ## Known Issues
 
 Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used.

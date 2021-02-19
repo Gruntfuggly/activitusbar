@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Remove overridden keybindings (moved to README.md)
+
 ## v0.0.37 - 2020-12-07
 
 - Fix terminal opening command
