@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.39 - 2021-03-09
+
 - Add better default icons for supporting new product icon themes
 
 ## v0.0.38 - 2021-02-19
