@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Add better default icons for supporting new product icon themes
+
 ## v0.0.38 - 2021-02-19
 
 - Remove overridden keybindings (moved to README.md)
