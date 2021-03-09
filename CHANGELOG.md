@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Update README.md with default settings
+
 ## v0.0.39 - 2021-03-09
 
 - Add better default icons for supporting new product icon themes

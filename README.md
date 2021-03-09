@@ -87,23 +87,23 @@ You can also add a button which opens the settings GUI using
 "activitusbar.views": [
     {
       "name": "explorer",
-      "codicon": "files"
+      "codicon": "explorer-view-icon"
     },
     {
       "name": "search",
-      "codicon": "search"
+      "codicon": "search-view-icon"
     },
     {
       "name": "scm",
-      "codicon": "source-control"
+      "codicon": "source-control-view-icon"
     },
     {
       "name": "debug",
-      "codicon": "debug"
+      "codicon": "run-view-icon"
     },
     {
       "name": "extensions",
-      "codicon": "extensions"
+      "codicon": "extensions-view-icon"
     }
   ]
 ```
