@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.40 - 2021-03-09
+
 - Update README.md with default settings
 
 ## v0.0.39 - 2021-03-09
