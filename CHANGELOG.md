@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.41 - 2021-03-10
+
 - Improve key bindings support
 
 ## v0.0.40 - 2021-03-09
