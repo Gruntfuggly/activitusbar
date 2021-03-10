@@ -120,16 +120,21 @@ function activate( context )
             } );
         }
 
-        function showView( view )
+        function highlightView( view )
         {
-            deselect();
-            var command = mapping[ view ] ? mapping[ view ].command : 'workbench.view.' + view;
-            vscode.commands.executeCommand( command );
             if( buttons[ view ] )
             {
                 buttons[ view ].color = activeColour();
             }
             open = view;
+        }
+
+        function showView( view )
+        {
+            var command = mapping[ view ] ? mapping[ view ].command : 'workbench.view.' + view;
+            vscode.commands.executeCommand( command );
+            deselect();
+            highlightView( view );
         }
 
         function toggleView( view )
@@ -176,14 +181,16 @@ function activate( context )
 
         function showSearchViewWithSelection()
         {
-            showView( 'search' );
-            vscode.commands.executeCommand( "workbench.action.findInFilesWithSelectedText" );
+            vscode.commands.executeCommand( "workbench.action.findInFiles" );
+            deselect();
+            highlightView( 'search' );
         }
 
         function showReplaceViewWithSelection()
         {
-            showView( 'search' );
             vscode.commands.executeCommand( "workbench.action.replaceInFiles" );
+            deselect();
+            highlightView( 'search' );
         }
 
         function makeShowView( view )

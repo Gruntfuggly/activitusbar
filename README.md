@@ -6,8 +6,6 @@ One of my work colleagues was complaining about the activity bar wasting too muc
 
 The buttons are configurable, using `activitusbar.views`. This is a array containing objects with names, their associated icons and optional tooltips or labels. By default, all standard views are enabled, i.e. Explorer, Search, SCM, Debug and Extensions. (*See Default Configuration below*). When overriding the default settings, default icons will be used if not specified.
 
-This extension also rebinds the main view selection keys. If you have modified the default key bindings, this may be an issue.
-
 The panel views Terminal, Problems, Output and Debug Console can now also be moved to the activity bar. The extension supports these using the names "terminal", "problems", "output" and "debugConsole", again with default icons. These buttons will still work if the panel views are kept in the default location, but the views will not hide again if `activitusbar.toggleSidebar` is enabled.
 
 The colour of the active and inactive buttons can also be specified using `activitusbar.activeColour` and `activitusbar.inactiveColour`. The configuration accepts either theme colour names (e.g. `editor.foreground`, see <https://code.visualstudio.com/api/references/theme-color> for the full list), standard HTML/CSS colour names or hex colour codes (e.g. `#ff0000`). If the colours are not specified in the configuration, the current status bar foreground (`statusBar.foreground`) and the inactive activity bar icon (`activityBar.inactiveForeground`) are used.
@@ -110,7 +108,9 @@ You can also add a button which opens the settings GUI using
 
 ### Keybindings
 
-You may want to override the default keybindings in order to use them with activitusbar:
+You may want to override the default keybindings in order to use them with activitusbar. This will also allow the highlighted icon to stay in sync if you use keyboard shortcuts to change view.
+
+*Note: You may also have to disable the default keyboard bindings.*
 
 ```json
 {
@@ -131,7 +131,7 @@ You may want to override the default keybindings in order to use them with activ
 {
   "command": "activitusbar.showScmView",
   "key": "ctrl+shift+G",
-  "mac": "ctrl+shift+G"
+  "mac": "shift+cmd+G"
 },
 {
   "command": "activitusbar.showDebugView",
@@ -147,7 +147,7 @@ You may want to override the default keybindings in order to use them with activ
 
 ## Known Issues
 
-Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used.
+Because there is no way to know when a view has been selected, the currently active view will not stay in sync if the normal activity bar is used, or the view is changed using the **Open View...** from the **View** menu.
 
 If **Find in Files** is selected from the Edit Menu, again, the currently active view will become out of sync.
 
