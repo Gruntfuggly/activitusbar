@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.42 - 2021-05-01
+
 - Add counter to source control view button
 
 ## v0.0.41 - 2021-03-10
