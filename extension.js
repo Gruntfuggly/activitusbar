@@ -1,7 +1,11 @@
 
 var vscode = require( 'vscode' );
+var childProcess = require( 'child_process' );
 var colourNames = require( './colourNames.js' );
 var themeColourNames = require( './themeColourNames.js' );
+
+var countTimeout;
+var fileSystemWatcher;
 
 function activate( context )
 {
@@ -380,6 +384,74 @@ function activate( context )
             }
         }
 
+        function setScmCount( count )
+        {
+            if( buttons.scm !== undefined )
+            {
+                var views = vscode.workspace.getConfiguration( 'activitusbar' ).get( 'views' );
+                views.map( function( view )
+                {
+                    if( view.name === 'scm' )
+                    {
+                        var icon = getIcon( view );
+                        buttons.scm.text = '$(' + icon + ')' + ( count > 0 ? count : '' ) + ( view.label ? ' ' + view.label : '' );
+                    }
+                } );
+            }
+        }
+
+        function updateScmCount()
+        {
+            if( buttons.scm !== undefined )
+            {
+                var total = 0;
+                if( vscode.workspace.workspaceFolders )
+                {
+                    vscode.workspace.workspaceFolders.map( function( folder )
+                    {
+                        var raw = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' status -s | wc -l' );
+                        var changes = parseInt( raw );
+                        total += changes;
+                    } );
+                    count = total;
+                }
+
+                setScmCount( total );
+            }
+        }
+
+        function resetFilewatcher()
+        {
+            if( fileSystemWatcher !== undefined )
+            {
+                fileSystemWatcher.dispose();
+            }
+
+            if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'showSourceControlCounter' ) !== false )
+            {
+                fileSystemWatcher = vscode.workspace.createFileSystemWatcher( '**/*' );
+
+                context.subscriptions.push( fileSystemWatcher );
+
+                fileSystemWatcher.onDidChange( triggerScmCount );
+                fileSystemWatcher.onDidCreate( triggerScmCount );
+                fileSystemWatcher.onDidDelete( triggerScmCount );
+
+                updateScmCount();
+            }
+            else
+            {
+                setScmCount( 0 );
+            }
+
+        }
+
+        function triggerScmCount()
+        {
+            clearTimeout( countTimeout );
+            countTimeout = setTimeout( updateScmCount, 1000 );
+        }
+
         context.subscriptions.push(
             vscode.commands.registerCommand( 'activitusbar.showSearchViewWithSelection', showSearchViewWithSelection ),
             vscode.commands.registerCommand( 'activitusbar.showReplaceViewWithSelection', showReplaceViewWithSelection ) );
@@ -389,10 +461,13 @@ function activate( context )
             if( e.affectsConfiguration( "activitusbar" ) )
             {
                 createButtons();
+                resetFilewatcher();
             }
         } ) );
 
         createButtons();
+
+        resetFilewatcher();
     }
 
     build();

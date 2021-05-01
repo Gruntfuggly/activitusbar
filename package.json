@@ -95,6 +95,11 @@
                     "type": "boolean",
                     "description": "Set this to true to combine any workspace settings into the user settings instead of overwritting them",
                     "default": false
+                },
+                "activitusbar.showSourceControlCounter": {
+                    "type": "boolean",
+                    "description": "Show a count of modified files next to the Source Control view button",
+                    "default": true
                 }
             }
         }
