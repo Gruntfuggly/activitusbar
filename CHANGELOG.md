@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.42 - 2021-05-18
+
 - Try not to interfere with external git processes (e.g. rebase)
 
 ## v0.0.42 - 2021-05-01
