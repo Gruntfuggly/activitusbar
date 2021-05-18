@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Try not to interfere with external git processes (e.g. rebase)
+
 ## v0.0.42 - 2021-05-01
 
 - Add counter to source control view button

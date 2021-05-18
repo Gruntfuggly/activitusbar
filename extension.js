@@ -1,6 +1,10 @@
 
 var vscode = require( 'vscode' );
+
 var childProcess = require( 'child_process' );
+var fs = require( 'fs' );
+var path = require( 'path' );
+
 var colourNames = require( './colourNames.js' );
 var themeColourNames = require( './themeColourNames.js' );
 
@@ -402,21 +406,30 @@ function activate( context )
 
         function updateScmCount()
         {
-            if( buttons.scm !== undefined )
+            if( vscode.window.state.focused === true )
             {
-                var total = 0;
-                if( vscode.workspace.workspaceFolders )
+                if( buttons.scm !== undefined )
                 {
-                    vscode.workspace.workspaceFolders.map( function( folder )
+                    var total = 0;
+                    if( vscode.workspace.workspaceFolders )
                     {
-                        var raw = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' status -s | wc -l' );
-                        var changes = parseInt( raw );
-                        total += changes;
-                    } );
-                    count = total;
-                }
+                        vscode.workspace.workspaceFolders.map( function( folder )
+                        {
+                            var gitFolder = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' rev-parse --show-toplevel 2>/dev/null' ).toString();
+                            var locked = fs.existsSync( path.join( gitFolder, '.git', 'index.lock' ) );
+                            if( locked === false )
+                            {
+                                var raw = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' status -s | wc -l' );
+                                var changes = parseInt( raw );
+                                total += changes;
+                            }
 
-                setScmCount( total );
+                        } );
+                        count = total;
+                    }
+
+                    setScmCount( total );
+                }
             }
         }
 
@@ -462,6 +475,17 @@ function activate( context )
             {
                 createButtons();
                 resetFilewatcher();
+            }
+        } ) );
+
+        context.subscriptions.push( vscode.window.onDidChangeWindowState( function( e )
+        {
+            if( e && e.focused )
+            {
+                if( vscode.workspace.getConfiguration( 'activitusbar' ).get( 'showSourceControlCounter' ) !== false )
+                {
+                    updateScmCount();
+                }
             }
         } ) );
 
