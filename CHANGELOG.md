@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.45 - 2021-05-21
+
 - Remove colour picker change (shows an error when no colour is defined)
 
 ## v0.0.44 - 2021-05-21
