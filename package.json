@@ -2,7 +2,7 @@
     "name": "activitusbar",
     "displayName": "Activitus Bar",
     "description": "Save some real estate by recreating the activity bar buttons on the status bar",
-    "version": "0.0.43",
+    "version": "0.0.44",
     "icon": "icon.png",
     "publisher": "Gruntfuggly",
     "license": "MIT",

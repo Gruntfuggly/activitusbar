@@ -1,9 +1,11 @@
 # Activitus Bar Change Log
 
+## v0.0.44 - 2021-05-21
+
 - Allow colour picker to be used in settings.json
 - Fix error when not in a git repo
 
-## v0.0.42 - 2021-05-18
+## v0.0.43 - 2021-05-18
 
 - Try not to interfere with external git processes (e.g. rebase)
 
