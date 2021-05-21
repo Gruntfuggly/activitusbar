@@ -61,13 +61,11 @@
                 },
                 "activitusbar.inactiveColour": {
                     "type": "string",
-                    "description": "Override colour of inactive icons",
-                    "format": "color-hex"
+                    "description": "Override colour of inactive icons"
                 },
                 "activitusbar.activeColour": {
                     "type": "string",
-                    "description": "Override colour of the active icon",
-                    "format": "color-hex"
+                    "description": "Override colour of the active icon"
                 },
                 "activitusbar.priority": {
                     "type": "integer",

@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Remove colour picker change (shows an error when no colour is defined)
+
 ## v0.0.44 - 2021-05-21
 
 - Allow colour picker to be used in settings.json
