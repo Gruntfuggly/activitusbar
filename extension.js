@@ -415,15 +415,20 @@ function activate( context )
                     {
                         vscode.workspace.workspaceFolders.map( function( folder )
                         {
-                            var gitFolder = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' rev-parse --show-toplevel 2>/dev/null' ).toString();
-                            var locked = fs.existsSync( path.join( gitFolder, '.git', 'index.lock' ) );
-                            if( locked === false )
+                            try
                             {
-                                var raw = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' status -s | wc -l' );
-                                var changes = parseInt( raw );
-                                total += changes;
+                                var gitFolder = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' rev-parse --show-toplevel 2>/dev/null' ).toString();
+                                var locked = fs.existsSync( path.join( gitFolder, '.git', 'index.lock' ) );
+                                if( locked === false )
+                                {
+                                    var raw = childProcess.execSync( 'git -C ' + folder.uri.fsPath + ' status -s | wc -l' );
+                                    var changes = parseInt( raw );
+                                    total += changes;
+                                }
+                            } catch( error )
+                            {
+                                // Probably not in a git repo
                             }
-
                         } );
                         count = total;
                     }
