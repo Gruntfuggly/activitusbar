@@ -106,6 +106,16 @@ You can also add a button which opens the settings GUI using
   ]
 ```
 
+### Source code counter
+
+You can also show a counter which is displayed next to the SCM view button. This attempts to emulate the badge that is shown in the activity bar. This can be enabled by settting:
+
+```json
+"activitusbar.showSourceControlCounter": true
+```
+
+*Note: Some users have reported that this interferes with VSCode dialogs*.
+
 ### Keybindings
 
 You may want to override the default keybindings in order to use them with activitusbar. This will also allow the highlighted icon to stay in sync if you use keyboard shortcuts to change view.

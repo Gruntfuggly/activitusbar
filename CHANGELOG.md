@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Disable SCM button counter by default
+
 ## v0.0.45 - 2021-05-21
 
 - Remove colour picker change (shows an error when no colour is defined)
