@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+## v0.0.46 - 2021-05-28
+
 - Disable SCM button counter by default
 
 ## v0.0.45 - 2021-05-21
