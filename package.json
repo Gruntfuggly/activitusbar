@@ -28,6 +28,22 @@
         "ui",
         "workspace"
     ],
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": "limited",
+            "restrictedConfigurations": [
+                "activitusbar.views",
+                "activitusbar.inactiveColour",
+                "activitusbar.activeColour",
+                "activitusbar.priority",
+                "activitusbar.alignment",
+                "activitusbar.toggleSidebar",
+                "activitusbar.searchViewInPanel",
+                "activitusbar.combineWorkspaceSettings",
+                "activitusbar.showSourceControlCounter"
+            ]
+        }
+    },
     "contributes": {
         "configuration": {
             "type": "object",
