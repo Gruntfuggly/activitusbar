@@ -1,7 +1,10 @@
 # Activitus Bar Change Log
 
+## v0.0.47 - 2022-12-09
+
 - Fix opening of custom views
 - Change activation event to "onStartupFinished"
+- Add support for untrusted workspaces, thanks to [notpushkin](https://github.com/notpushkin)
 
 ## v0.0.46 - 2021-05-28
 
