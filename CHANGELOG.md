@@ -1,6 +1,7 @@
 # Activitus Bar Change Log
 
 - Fix opening of custom views
+- Change activation event to "onStartupFinished"
 
 ## v0.0.46 - 2021-05-28
 
