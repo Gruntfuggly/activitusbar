@@ -139,7 +139,7 @@ function activate( context )
 
         function showView( view )
         {
-            var command = mapping[ view ] ? mapping[ view ].command : 'workbench.view.' + view;
+            var command = mapping[ view ] ? mapping[ view ].command : view + '.focus';
             vscode.commands.executeCommand( command );
             deselect();
             highlightView( view );

@@ -1,5 +1,7 @@
 # Activitus Bar Change Log
 
+- Fix opening of custom views
+
 ## v0.0.46 - 2021-05-28
 
 - Disable SCM button counter by default
