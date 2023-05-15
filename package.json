@@ -116,6 +116,11 @@
                     "type": "boolean",
                     "markownDescription": "Show a count of modified files next to the Source Control view button. *Note: Some users have reported that this interferes with VSCode dialogs.*",
                     "default": false
+                },
+                "activitusbar.toggleByActivityBar": {
+                    "type": "boolean",
+                    "description": "Hide activitus bar, when activity bar showed",
+                    "default": false
                 }
             }
         }
